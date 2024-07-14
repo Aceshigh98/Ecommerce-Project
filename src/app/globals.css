@@ -1,0 +1,131 @@
+:root {
+    --bg: #f8f9fa;
+    --bg2: black; 
+    --text: black;
+    --text2: white;
+    --btn: #ccc5b9;
+    --btnHover: #403d39;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);   
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1 {
+    font-size: 56px;
+}
+
+p {
+    font-size: 20px;
+    line-height: 2;
+}
+
+button {
+    background-color: var(--btn);
+}
+
+button:hover {
+    background-color: var(--btnHover);
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 25px;
+    }
+    p {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    h1 {
+        font-size: 20px;
+    }
+    p {
+        font-size: 12px;
+    }
+}
+
+.container {  
+    display: flex;
+    max-width: 2560px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+@media screen and (max-width: 3680px) {
+    .container {
+        width: calc(100% - 100px); /* Subtract padding from total width */
+    }
+}
+
+@media (max-width: 2500px) {
+    .container {
+        width: calc(100% - 100px); /* Subtract padding from total width */
+    }
+}
+
+@media (max-width: 1536px) {
+    .container {
+        width: calc(100%);
+    }
+}
+
+@media (max-width: 1366px) {
+    .container {
+        width: calc(100%);
+        
+    }
+}
+
+@media (max-width: 1280px) {
+    .container {
+        width: calc(100%);
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        width: calc(100%);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: calc(100%);
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        width: calc(100%);
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (max-width: 475px) {
+    .container {
+        width: calc(100%); /* Subtract padding from total width */
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
