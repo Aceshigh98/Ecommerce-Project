@@ -1,7 +1,25 @@
 import React from "react";
 
-const CigarCarousal = () => {
-  return <div>CigarCarousal</div>;
-};
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@";
 
-export default CigarCarousal;
+export function CigarCarousel() {
+  return (
+    <Carousel>
+      <CarouselContent>
+        <CarouselItem>...</CarouselItem>
+        <CarouselItem>...</CarouselItem>
+        <CarouselItem>...</CarouselItem>
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  );
+}
+
+export default CigarCarousel;

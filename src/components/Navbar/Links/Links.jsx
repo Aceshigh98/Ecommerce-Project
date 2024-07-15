@@ -5,27 +5,28 @@ import { useState } from "react";
 import styles from "./Links.module.css";
 import Navlink from "./NavLink/NavLink";
 import Image from "next/image";
+import { FiMenu } from "react-icons/fi";
 
 const links = [
   {
     name: "Home",
-    href: "/",
+    path: "/",
   },
   {
     name: "Shop",
-    href: "/shop",
+    path: "/shop",
   },
   {
     name: "Contact",
-    href: "/contact",
+    path: "/contact",
   },
   {
     name: "Checkout",
-    href: "/checkout",
+    path: "/checkout",
   },
   {
     name: "Login",
-    href: "/login",
+    path: "/login",
   },
 ];
 
@@ -36,6 +37,8 @@ const Links = () => {
 
   const [open, setOpen] = useState(false);
 
+  const closeMobileLinks = () => setOpen(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.links}>
@@ -44,23 +47,26 @@ const Links = () => {
         ))}
         {session && isAdmin ? (
           <>
-            {session && <Navlink item={{ name: "Admin", href: "/admin" }} />}
+            {session && <Navlink item={{ name: "Admin", path: "/admin" }} />}
             <form>
               <button className={styles.logout}>Logout</button>
             </form>
           </>
         ) : (
-          <Navlink item={{ name: "Login", href: "/login" }} />
+          <Navlink item={{ name: "Login", path: "/login" }} />
         )}
       </div>
-      <Image
+      <FiMenu
         className={styles.menuButton}
-        src="/cigarasset13.png"
-        alt=""
-        width={30}
-        height={30}
         onClick={() => setOpen((prev) => !prev)}
       />
+      {open && (
+        <div className={styles.mobileLinks}>
+          {links.map((link) => (
+            <Navlink item={link} key={link.name} onClick={closeMobileLinks} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

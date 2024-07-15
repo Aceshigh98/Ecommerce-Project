@@ -9,10 +9,10 @@
 .introContainer {
     display: flex;
     position: relative;
-    height: 700px;
+    height: 800px;
     width: 100%;
     overflow: hidden;
-    margin-top: 20px;
+    margin-top: 200px;
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
 }
@@ -20,7 +20,7 @@
 @media screen and (max-width: 768px) {
     .introContainer {
         margin-top: 0;
-        height: 400px;
+        height: 700px;
         width: 100%;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
