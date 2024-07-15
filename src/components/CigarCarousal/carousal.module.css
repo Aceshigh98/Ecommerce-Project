@@ -1,0 +1,18 @@
+
+.embla {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
+  }
+  .embla__container {
+    display: flex;
+  }
+  .embla__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+  }
+  
