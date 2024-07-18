@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './home.module.css'
-import CigarCarousal from '../components/CigarCarousal/CigarCarousal'
+import CigarCarousal from '../components/SignatureSelects/Selects'
 
 const Home = () => {
   return (
@@ -32,6 +32,7 @@ const Home = () => {
         <div className={styles.cigarOfMonthTextContainer}>
           <h1>CIGAR OF THE MONTH</h1>
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum vel cupiditate est repudiandae alias ipsum dolore a quo mollitia dolorem libero minus nam quibusdam adipisci consectetur, ex in quas. Vel?</p>
+          <button>View Cigar</button>
         </div>
     </div>
   </>

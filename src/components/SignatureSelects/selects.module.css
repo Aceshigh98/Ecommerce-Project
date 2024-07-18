@@ -1,0 +1,10 @@
+
+.container {
+  position: relative;  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+    margin: auto;
+  width: 100%;
+}

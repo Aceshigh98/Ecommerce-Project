@@ -1,5 +1,5 @@
 :root {
-    --bg: #f8f9fa;
+    --bg: #ffffff;
     --bg2: black; 
     --text: black;
     --text2: white;
@@ -33,6 +33,7 @@ p {
 
 button {
     background-color: var(--btn);
+    cursor: pointer;
 }
 
 button:hover {

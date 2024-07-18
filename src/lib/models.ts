@@ -1,0 +1,28 @@
+
+import mongoose from 'mongoose';
+
+const productsSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true },
+        description: { type: String, required: true },
+        price: { type: Number, required: true },
+        countInStock: { type: Number, required: true },
+        imageUrl: { type: String, required: true },
+    },
+    {
+        timestamps: true,
+    }
+);
+
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    isAdmin: { type: Boolean, required: true, default: false },
+}, {
+    timestamps: true
+})
+
+
+export const Product = mongoose.model('Product', productsSchema);
+export const User = mongoose.model('User', userSchema);
