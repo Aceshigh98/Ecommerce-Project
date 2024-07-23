@@ -15,7 +15,7 @@ const productsSchema = new mongoose.Schema(
 );
 
 const userSchema = new mongoose.Schema({
-    name: { type: String, required: true, unique: true },
+    username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
@@ -24,5 +24,5 @@ const userSchema = new mongoose.Schema({
 })
 
 
-export const Product = mongoose.model('Product', productsSchema);
-export const User = mongoose.model('User', userSchema);
+export const Product = mongoose.models?.Product || mongoose.model('Product', productsSchema);
+export const User = mongoose.models?.User || mongoose.model('User', userSchema);

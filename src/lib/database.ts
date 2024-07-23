@@ -7,7 +7,7 @@ interface Connection {
 
 const connection: Connection = {};
 
-export const connectDB = async ():Promise<void> => {
+export const connectDb = async ():Promise<void> => {
     try {
         if(connection.isConnected) {
             console.log('Using existing connection');
