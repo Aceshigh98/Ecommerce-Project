@@ -3,27 +3,28 @@ import Google from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "./models"; // Renamed to avoid conflict with NextAuth's User type
 import { connectDb } from "./database";
+import bcrypt from "bcryptjs";
+import { authConfig } from "./auth.config";
 
 const login = async (credentials) => {
   try {
     connectDb();
 
-    console.log(credentials);
-
     const user = await User.findOne({ username: credentials.username });
 
-    if (!user) throw new Error("Wrong credentials!");
+    if (!user) throw new Error("Wrong credentials1!");
 
     const isPasswordCorrext = await bcrypt.compare(
       credentials.password,
       user.password
     );
 
-    if (!isPasswordCorrext) throw new Error("Wrong credentials!");
+    if (!isPasswordCorrext) throw new Error("Wrong credentials2!");
 
+    console.log("User logged in successfully!");
     return user;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
     throw new Error("Failed to login!");
   }
 };
@@ -34,13 +35,8 @@ export const {
   signOut,
   auth,
 } = NextAuth({
-  // PAGES ARE USED TO DEFINE THE AUTHENTICATION ROUTES
-  pages: {
-    signIn: "/login",
-  },
-
-  secret: process.env.AUTH_SECRET,
-
+  //Spread authConfig
+  ...authConfig,
   // PROVIDERS ARE USED TO DEFINE THE AUTHENTICATION STRATEGY
   providers: [
     Google({
@@ -52,7 +48,7 @@ export const {
         try {
           const user = await login(credentials);
           return user;
-        } catch (error) {
+        } catch (err) {
           return null;
         }
       },
@@ -82,39 +78,7 @@ export const {
       }
       return true;
     },
-
-    // JWT AND SESSION CALLBACKS ARE USED TO ADD CUSTOM DATA TO THE JWT AND SESSION OBJECTS
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-      }
-      return token;
-    },
-
-    // SESSION CALLBACK IS USED TO ADD CUSTOM DATA TO THE SESSION OBJECT
-    async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id;
-        session.user.isAdmin = token.isAdmin;
-      }
-      return session;
-    },
-
-    // AUTHORIZED CALLBACK IS USED TO RESTRICT ACCESS TO CERTAIN PAGES
-    authorized({ auth, request }) {
-      const user = auth?.user;
-      const isOnAdminPanel = request.nextUrl?.pathname.startsWith("/admin");
-      const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");
-
-      if (isOnAdminPanel && !user?.isAdmin) {
-        return false;
-      }
-
-      if (isOnLoginPage && user) {
-        return Response.redirect(new URL("/", request.nextUrl));
-      }
-
-      return true;
-    },
+    //spread callbacks from authConfig function
+    ...authConfig.callbacks,
   },
 });

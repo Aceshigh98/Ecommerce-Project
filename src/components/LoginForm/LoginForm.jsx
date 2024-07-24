@@ -24,7 +24,7 @@ const LoginForm = () => {
         required={true}
       />
       <button>Login</button>
-      {/* {state?.error} */}
+      {state?.error}
       <Link href="/register">
         {"Don't have an account?"} <b>Register</b>
       </Link>

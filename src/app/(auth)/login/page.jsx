@@ -3,7 +3,7 @@ import styles from "./login.module.css";
 import LoginForm from "@/src/components/LoginForm/LoginForm";
 import { FcGoogle } from "react-icons/fc";
 
-const Login = () => {
+const Login = async () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
