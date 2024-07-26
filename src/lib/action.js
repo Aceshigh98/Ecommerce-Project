@@ -1,5 +1,4 @@
 "use server";
-
 import { connectDb } from "./database";
 import { User } from "./models";
 import { signIn, signOut } from "./auth";
@@ -14,7 +13,6 @@ export const login = async (previousState, formData) => {
   try {
     await signIn("credentials", { username, password });
   } catch (err) {
-    console.log("Error------", err);
     if (err.message.includes("CredentialsSignin")) {
       return { error: "Invalid username or password" };
     }

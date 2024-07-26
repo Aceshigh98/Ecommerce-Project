@@ -1,0 +1,70 @@
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 800px;
+    height: fit-content;
+    margin: 20px;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: var(--form);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.form input {
+    width: 95%;
+    height: 30px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid var(--form);
+    border-radius: 5px;
+}
+
+.innerWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form textarea {
+    width: 95%;
+    height: 400px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid var(--form);
+    border-radius: 5px;
+}
+
+.form button {
+    width: 150px;
+    height: 50px;
+    margin: 10px;
+    border: none;
+    font-weight: 800;
+    border-radius: 5px;
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form p {
+    color: var(--text);
+    font-size: 16px;
+    margin: 10px;
+}
+
+.form button:hover {
+    background-color: var(--btnHover);
+}

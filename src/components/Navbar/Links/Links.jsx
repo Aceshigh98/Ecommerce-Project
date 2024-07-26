@@ -31,7 +31,7 @@ const Links = ({ session }) => {
 
   const [open, setOpen] = useState(false);
 
-  const closeMobileLinks = () => setOpen(false);
+  console.log(session);
 
   return (
     <div className={styles.container}>
@@ -59,7 +59,7 @@ const Links = ({ session }) => {
       {open && (
         <div className={styles.mobileLinks}>
           {links.map((link) => (
-            <Navlink item={link} key={link.name} onClick={closeMobileLinks} />
+            <Navlink item={link} key={link.name} onClick={setOpen} />
           ))}
         </div>
       )}

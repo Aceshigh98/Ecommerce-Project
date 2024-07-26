@@ -24,8 +24,7 @@ export const authConfig = {
     },
 
     // AUTHORIZED CALLBACK IS USED TO RESTRICT ACCESS TO CERTAIN PAGES
-    authorized({ auth, request }) {
-      console.log("Auth------- " + auth);
+    async authorized({ auth, request }) {
       const user = auth?.user;
       const isOnAdminPanel = request.nextUrl?.pathname.startsWith("/admin");
       const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");

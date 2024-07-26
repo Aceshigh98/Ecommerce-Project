@@ -12,14 +12,14 @@ const login = async (credentials) => {
 
     const user = await User.findOne({ username: credentials.username });
 
-    if (!user) throw new Error("Wrong credentials1!");
+    if (!user) throw new Error("Wrong credentials!");
 
     const isPasswordCorrext = await bcrypt.compare(
       credentials.password,
       user.password
     );
 
-    if (!isPasswordCorrext) throw new Error("Wrong credentials2!");
+    if (!isPasswordCorrext) throw new Error("Wrong credentials!");
 
     console.log("User logged in successfully!");
     return user;
@@ -35,9 +35,7 @@ export const {
   signOut,
   auth,
 } = NextAuth({
-  //Spread authConfig
   ...authConfig,
-  // PROVIDERS ARE USED TO DEFINE THE AUTHENTICATION STRATEGY
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -58,16 +56,18 @@ export const {
   // FOR MORE DETAIL ABOUT CALLBACK FUNCTIONS CHECK https://next-auth.js.org/configuration/callbacks
   callbacks: {
     async signIn({ user, account, profile }) {
+      console.log(profile);
+      console.log(account);
       if (account.provider === "google") {
         connectDb();
         try {
-          const existingUser = await User.findOne({ email: profile.email });
+          const existingUser = await User.findOne({
+            email: profile.email,
+          });
           if (!existingUser) {
             const newUser = new User({
-              username: profile.login,
               email: profile.email,
               name: profile.name,
-              image: profile.image,
             });
             await newUser.save();
           }
