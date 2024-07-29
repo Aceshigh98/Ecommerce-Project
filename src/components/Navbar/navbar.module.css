@@ -8,6 +8,7 @@
     justify-content: space-evenly;
     align-items: center;
     z-index: 10;
+    background-color: var(--bg);
 }
 
 .logo{
