@@ -1,0 +1,46 @@
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: fit-content;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: var(--input);
+
+}
+
+.label {
+    font-size: 1rem;
+    font-weight: 900;
+    gap: 10px;
+}
+
+.button{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    font-size: large;
+    font-weight: 600;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+}
+
+.active {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    font-size: large;
+    font-weight: 600;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--btnHover);
+}

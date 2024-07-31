@@ -16,18 +16,19 @@
 .logout {
   min-width: 100px;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 5px;
+  background-color: var(--btn);
+  cursor: pointer;
   font-weight: 800;
   height: 100%;
   text-align: center;
   color: var(--text);
   z-index: 10;
   border: none;
-  background-color: transparent;
 }
 
 .logout:hover {
-  background-color: var(--btn);
+  background-color:  var(--btnHover);
   color: var(--text);
 }
 

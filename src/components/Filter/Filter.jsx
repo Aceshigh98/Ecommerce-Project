@@ -2,27 +2,54 @@
 
 import React from "react";
 import styles from "./filter.module.css";
-import Slider from "./FilterComponents/Slider/Slider";
-import { handleCategoryChange, handlePriceChange } from "@/src/utils/search";
+import Slider from "./FilterComponents/Slider/sliderFilter";
+import RadioFilter from "./FilterComponents/Radio/radioFilter";
+import { cigarBrands, cigarSize, cigarWrapper } from "@/src/lib/data";
+
+import {
+  handleSizeChange,
+  handlePriceChange,
+  handleBrandChange,
+  handleWrapperChange,
+} from "@/src/utils/search";
 
 const Filter = ({ filter, setFilter }) => {
+  const clearFilterHandler = () => {
+    setFilter((prev) => ({
+      ...prev,
+      brand: "",
+      size: "",
+      wrapper: "",
+      priceTarget: [0, prev.maxPrice],
+    }));
+  };
+
   return (
     <div className={styles.filterContainer}>
-      <select
-        value={filter.category}
-        onChange={(e) => handleCategoryChange(e, setFilter)}
-      >
-        <option value="">All Categories</option>
-        <option value="Conneticut">Conneticut</option>
-        <option value="Robusto">Robusto</option>
-        <option value="Toro">Toro</option>
-        <option value="Churchill">Churchill</option>
-      </select>
       <Slider
-        minPrice={0}
         maxPrice={filter.maxPrice}
         onPriceChange={(e) => handlePriceChange(e, setFilter)}
+        selectedValue={filter.priceTarget}
       />
+      <RadioFilter
+        items={cigarBrands}
+        onChange={(e) => handleBrandChange(e, setFilter)}
+        selectedValue={filter.brand}
+      />
+      <RadioFilter
+        items={cigarSize}
+        onChange={(e) => handleSizeChange(e, setFilter)}
+        selectedValue={filter.size}
+      />
+      <RadioFilter
+        items={cigarWrapper}
+        onChange={(e) => handleWrapperChange(e, setFilter)}
+        selectedValue={filter.wrapper}
+      />
+
+      <button className={styles.clear} onClick={clearFilterHandler}>
+        Clear Filters
+      </button>
     </div>
   );
 };

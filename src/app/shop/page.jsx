@@ -29,12 +29,9 @@ const Shop = () => {
     const filtered = productsStore.filter((product) => {
       return filterMain(product, filter);
     });
-    console.log(filtered);
     setFilteredProducts(filtered);
   }, [filter]);
 
-  console.log(filteredProducts);
-  console.log(filter);
   return (
     <div className={styles.container}>
       <Filter filter={filter} setFilter={setFilter} />

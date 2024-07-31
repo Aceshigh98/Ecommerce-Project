@@ -1,6 +1,6 @@
 //Filter Object
 export const filterObject = {
-  category: "",
+  size: "",
   brand: "",
   wrapper: "",
   priceTarget: undefined,
@@ -9,8 +9,8 @@ export const filterObject = {
 };
 
 //Check if product matches category filter
-const category = (product, filter) => {
-  return filter.category === "" || product.category.includes(filter.category);
+const size = (product, filter) => {
+  return filter.category === "" || product.size.includes(filter.size);
 };
 
 //Check if product matches brand filter
@@ -37,7 +37,7 @@ export const maxPrice = (products) => {
 
 //Filter Main
 export const filterMain = (product, filter) => {
-  const matchesCategory = category(product, filter);
+  const matchesSize = size(product, filter);
   const matchesBrand = brand(product, filter);
   const matchesWrapper = wrapper(product, filter);
   const matchesPrice = filter.priceTarget
@@ -45,12 +45,14 @@ export const filterMain = (product, filter) => {
       product.priceForSingle <= filter.priceTarget[1]
     : true;
 
-  return matchesCategory && matchesBrand && matchesWrapper && matchesPrice;
+  return matchesSize && matchesBrand && matchesWrapper && matchesPrice;
 };
 
 //Handlers
-export const handleCategoryChange = (e, setFilter) => {
-  setFilter((prev) => ({ ...prev, category: e.target.value }));
+//Brand filter
+export const handleBrandChange = (e, setFilter) => {
+  console.log(e);
+  setFilter((prev) => ({ ...prev, brand: e }));
 };
 
 //Price for single filter
@@ -59,4 +61,15 @@ export const handlePriceChange = (e, setFilter) => {
     ...prev,
     priceTarget: e,
   }));
+};
+
+//Size filter
+export const handleSizeChange = (e, setFilter) => {
+  console.log(e);
+  setFilter((prev) => ({ ...prev, size: e }));
+};
+
+//Wrapper filter
+export const handleWrapperChange = (e, setFilter) => {
+  setFilter((prev) => ({ ...prev, wrapper: e }));
 };

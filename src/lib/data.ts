@@ -51,7 +51,8 @@ export const products = [
         {
             id: 1,
             title: "Cohiba Cigars",
-            category: "Conneticut",
+            size: "Torpedo",
+            wrapper: "Maduro",
             brand: "Cohiba",
             body : "Cohiba cigars are a premium brand of cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of premium tobaccos from around the world.",
             priceForSingle: 9.99,
@@ -61,7 +62,8 @@ export const products = [
         {
             id: 2,
             title: "Buffalo Trace Cigars",
-            category: "Conneticut",
+            size: "Corona",
+            wrapper: "Maduro",
             brand: "Buffalo Trace",
             body: "Buffalo Trace Cigars are a great choice for those who enjoy a smooth, flavorful smoke.",
             priceForSingle: 9.99,
@@ -71,8 +73,9 @@ export const products = [
         {
             id: 3,
             title: "LaGloria Series R Cigars",
-            category: "Robusto",
-            brand: "LaGloria",
+            size: "Toro",
+            wrapper: "Conneticut",
+            brand: "La Gloria Cubana",
             body: "La Gloria Cubana Serie R cigars are full-bodied cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of Nicaraguan and Dominican tobaccos. that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
@@ -81,7 +84,8 @@ export const products = [
         {
             id: 4,
             title: "Oliva Cigars",
-            category: "Robusto",
+            size: "Robusto",
+            wrapper: "USA Conneticut",
             brand: "Oliva",
             body: "Oliva cigars are a premium brand of cigars that are handcrafted in Nicaragua. These cigars are made with a blend of tobaccos that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
@@ -91,7 +95,8 @@ export const products = [
         {
             id: 5,
             title: "Cohiba Cigars",
-            category: "Conneticut",
+            size: "Gordo",
+            wrapper: "USA Conneticut",
             brand: "Cohiba",
             body : "Cohiba cigars are a premium brand of cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of premium tobaccos from around the world.",
             priceForSingle: 9.99,
@@ -101,7 +106,8 @@ export const products = [
         {
             id: 6,
             title: "Buffalo Trace Cigars",
-            category: "Churchill",
+            size: "Robusto",
+            wrapper: "USA Conneticut",
             brand: "Buffalo Trace",
             body: "Buffalo Trace Cigars are a great choice for those who enjoy a smooth, flavorful smoke.",
             priceForSingle: 9.99,
@@ -111,8 +117,9 @@ export const products = [
         {
             id: 7,
             title: "LaGloria Series R Cigars",
-            category: "Robusto",
-            brand: "LaGloria",
+            size: "Robusto",
+            wrapper: "USA Conneticut",
+            brand: "La Gloria Cubana",
             body: "La Gloria Cubana Serie R cigars are full-bodied cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of Nicaraguan and Dominican tobaccos. that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 6.99,
             priceForBox: 99.99, 
@@ -121,7 +128,8 @@ export const products = [
         {
             id: 8,
             title: "Oliva Cigars",
-            category: "toro",
+            size: "Churchill",
+            wrapper: "Conneticut",
             brand: "Oliva",
             body: "Oliva cigars are a premium brand of cigars that are handcrafted in Nicaragua. These cigars are made with a blend of tobaccos that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
@@ -131,7 +139,8 @@ export const products = [
         {
             id: 9,
             title: "Cohiba Cigars",
-            category: "Conneticut",
+            size: "Churchill",
+            wrapper: "Conneticut",
             brand: "Cohiba",
             body : "Cohiba cigars are a premium brand of cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of premium tobaccos from around the world.",
             priceForSingle: 15.00,
@@ -141,7 +150,8 @@ export const products = [
         {
             id: 10,
             title: "Buffalo Trace Cigars",
-            category: "Conneticut",
+            size: "Churchill",
+            wrapper: "Ecuadorian Sumatra",
             brand: "Buffalo Trace",
             body: "Buffalo Trace Cigars are a great choice for those who enjoy a smooth, flavorful smoke.",
             priceForSingle: 17.00,
@@ -151,8 +161,9 @@ export const products = [
         {
             id: 11,
             title: "LaGloria Series R Cigars",
-            category: "Robusto",
-            brand: "LaGloria",
+            size: "Robusto",
+            wrapper: "Ecuadorian Sumatra",
+            brand: "La Gloria Cubana",
             body: "La Gloria Cubana Serie R cigars are full-bodied cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of Nicaraguan and Dominican tobaccos. that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
@@ -161,7 +172,8 @@ export const products = [
         {
             id: 12,
             title: "Oliva Cigars",
-            category: "Toro",
+            size: "Toro",
+            wrapper: "Ecuadorian Sumatra",
             brand: "Oliva",
             body: "Oliva cigars are a premium brand of cigars that are handcrafted in Nicaragua. These cigars are made with a blend of tobaccos that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
@@ -169,6 +181,19 @@ export const products = [
             img: "/sigasset1.png"
         },
         ];
+    
+        export const cigarBrands = {
+        category: "Brand",
+        type:["Buffalo Trace", "Cohiba", "Oliva", "La Gloria Cubana"]};
+    
+        export const cigarSize = {
+        category: "Size",
+        type:["Robusto", "Churchill", "Toro"]}
+
+        export const cigarWrapper = {
+        category: "Wrapper",
+        type:["Conneticut", "Equadorian Sumatra", "Maduro", "USA Conneticut"]}
+
 
 export const getPosts = () => {
     return products;
@@ -181,6 +206,8 @@ export const getPost = (id: number) => {
 export const getUser = (id: number) => {
     return user.find(user => user.id === id);
 }
+
+
 
 
 
