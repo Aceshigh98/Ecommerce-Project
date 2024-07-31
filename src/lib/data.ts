@@ -51,6 +51,8 @@ export const products = [
         {
             id: 1,
             title: "Cohiba Cigars",
+            category: "Conneticut",
+            brand: "Cohiba",
             body : "Cohiba cigars are a premium brand of cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of premium tobaccos from around the world.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
@@ -59,6 +61,8 @@ export const products = [
         {
             id: 2,
             title: "Buffalo Trace Cigars",
+            category: "Conneticut",
+            brand: "Buffalo Trace",
             body: "Buffalo Trace Cigars are a great choice for those who enjoy a smooth, flavorful smoke.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
@@ -67,6 +71,8 @@ export const products = [
         {
             id: 3,
             title: "LaGloria Series R Cigars",
+            category: "Robusto",
+            brand: "LaGloria",
             body: "La Gloria Cubana Serie R cigars are full-bodied cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of Nicaraguan and Dominican tobaccos. that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
@@ -75,70 +81,88 @@ export const products = [
         {
             id: 4,
             title: "Oliva Cigars",
+            category: "Robusto",
+            brand: "Oliva",
             body: "Oliva cigars are a premium brand of cigars that are handcrafted in Nicaragua. These cigars are made with a blend of tobaccos that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
             img: "/sigasset1.png"
         },
         {
-            id: 1,
+            id: 5,
             title: "Cohiba Cigars",
+            category: "Conneticut",
+            brand: "Cohiba",
             body : "Cohiba cigars are a premium brand of cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of premium tobaccos from around the world.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
             img: "/sigasset4.png"
         },
         {
-            id: 2,
+            id: 6,
             title: "Buffalo Trace Cigars",
+            category: "Churchill",
+            brand: "Buffalo Trace",
             body: "Buffalo Trace Cigars are a great choice for those who enjoy a smooth, flavorful smoke.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
             img: "/sigasset3.png"
         },
         {
-            id: 3,
+            id: 7,
             title: "LaGloria Series R Cigars",
+            category: "Robusto",
+            brand: "LaGloria",
             body: "La Gloria Cubana Serie R cigars are full-bodied cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of Nicaraguan and Dominican tobaccos. that are wrapped in a rich Ecuadorian Sumatra wrapper.",
-            priceForSingle: 9.99,
+            priceForSingle: 6.99,
             priceForBox: 99.99, 
             img: "/sigasset2.png"
         },
         {
-            id: 4,
+            id: 8,
             title: "Oliva Cigars",
+            category: "toro",
+            brand: "Oliva",
             body: "Oliva cigars are a premium brand of cigars that are handcrafted in Nicaragua. These cigars are made with a blend of tobaccos that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
             img: "/sigasset1.png"
         },
         {
-            id: 1,
+            id: 9,
             title: "Cohiba Cigars",
+            category: "Conneticut",
+            brand: "Cohiba",
             body : "Cohiba cigars are a premium brand of cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of premium tobaccos from around the world.",
-            priceForSingle: 9.99,
+            priceForSingle: 15.00,
             priceForBox: 99.99, 
             img: "/sigasset4.png"
         },
         {
-            id: 2,
+            id: 10,
             title: "Buffalo Trace Cigars",
+            category: "Conneticut",
+            brand: "Buffalo Trace",
             body: "Buffalo Trace Cigars are a great choice for those who enjoy a smooth, flavorful smoke.",
-            priceForSingle: 9.99,
+            priceForSingle: 17.00,
             priceForBox: 99.99, 
             img: "/sigasset3.png"
         },
         {
-            id: 3,
+            id: 11,
             title: "LaGloria Series R Cigars",
+            category: "Robusto",
+            brand: "LaGloria",
             body: "La Gloria Cubana Serie R cigars are full-bodied cigars that are handcrafted in the Dominican Republic. These cigars are made with a blend of Nicaraguan and Dominican tobaccos. that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
             img: "/sigasset2.png"
         },
         {
-            id: 4,
+            id: 12,
             title: "Oliva Cigars",
+            category: "Toro",
+            brand: "Oliva",
             body: "Oliva cigars are a premium brand of cigars that are handcrafted in Nicaragua. These cigars are made with a blend of tobaccos that are wrapped in a rich Ecuadorian Sumatra wrapper.",
             priceForSingle: 9.99,
             priceForBox: 99.99, 
@@ -157,6 +181,8 @@ export const getPost = (id: number) => {
 export const getUser = (id: number) => {
     return user.find(user => user.id === id);
 }
+
+
 
 
 

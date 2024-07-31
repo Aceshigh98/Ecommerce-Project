@@ -1,0 +1,29 @@
+.sliderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .values {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .values span {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  .sliders {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .slider {
+    width: 100%;
+    margin: 0 5px;
+  }
+  

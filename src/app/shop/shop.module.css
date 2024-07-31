@@ -4,7 +4,7 @@
  height: fit-content;   
  display: flex;
  position: relative;
- background-color: var(--backdrop);
+ background-color: var(--bg);
  margin-top: 200px;
  z-index: 2;
  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
