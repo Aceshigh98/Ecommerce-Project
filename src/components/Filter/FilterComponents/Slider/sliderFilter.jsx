@@ -1,26 +1,34 @@
 import React, { useState, useEffect } from "react";
 import styles from "./sliderFilter.module.css";
 
-const PriceSlider = ({ maxPrice, onPriceChange, selectedValue }) => {
-  const [minValue, setMinValue] = useState(0);
+const PriceSlider = ({
+  maxPrice,
+  onPriceChangeLow,
+  onPriceChangeHigh,
+  selectedValue = [0, maxPrice],
+}) => {
+  const [minValue, setMinValue] = useState(selectedValue[0]);
   const [maxValue, setMaxValue] = useState(maxPrice);
+
+  useEffect(() => {
+    setMinValue(selectedValue[0]);
+  }, [selectedValue]);
+
+  useEffect(() => {
+    setMaxValue(maxPrice);
+  }, [maxPrice]);
 
   const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxValue);
     setMinValue(value);
-    onPriceChange([value, maxValue]);
+    onPriceChangeLow(value);
   };
 
   const handleMaxChange = (e) => {
     const value = Math.max(Number(e.target.value), minValue);
     setMaxValue(value);
-    onPriceChange([minValue, value]);
+    onPriceChangeHigh(value);
   };
-
-  useEffect(() => {
-    setMinValue(0);
-    setMaxValue(selectedValue);
-  }, [selectedValue]);
 
   return (
     <div className={styles.sliderContainer}>

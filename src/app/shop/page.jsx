@@ -5,6 +5,7 @@ import styles from "./shop.module.css";
 
 //Components
 import Filter from "@/src/components/Filter/Filter";
+import MobileFilter from "@/src/components/MobileFilter/MobileFilter";
 import Products from "@/src/components/Products/Products";
 
 //Functions
@@ -15,6 +16,8 @@ const Shop = () => {
   //Fetch Products from database eventusally.
   //const products = await getProducts();
 
+  const initialWidth = window.innerWidth < 768;
+  const [width, setWidth] = useState(initialWidth);
   const [filter, setFilter] = useState(() => {
     const maxPriceValue = maxPrice(productsStore);
     return {
@@ -32,9 +35,24 @@ const Shop = () => {
     setFilteredProducts(filtered);
   }, [filter]);
 
+  // Effect to check window size and set width state
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
-      <Filter filter={filter} setFilter={setFilter} />
+      {width ? (
+        <MobileFilter filter={filter} setFilter={setFilter} />
+      ) : (
+        <Filter filter={filter} setFilter={setFilter} />
+      )}
       <Products products={filteredProducts} />
     </div>
   );

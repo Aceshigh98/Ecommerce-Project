@@ -4,7 +4,6 @@
   align-items: center;
   gap: 10px;
   justify-content: space-between;
-  z-index: 10;
   width: 100%; /* Ensure the container takes the full width */
 }
 
@@ -42,6 +41,8 @@
     align-items: center;
     justify-content: space-between; /* Ensures the items are spread out */
     padding-right: 25px; /* Padding to the right to keep distance from the edge */
+    height: 75px;
+    width: 75px;
   }
 
   .links {
@@ -49,11 +50,15 @@
   }
 
   .menuButton {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
     display: block;
     cursor: pointer;
     width: 50px;
     height: 50px;
-    color: var(--btn);
+    color: black;
     margin-left: auto; /* This will push the menu button to the far right */
   }
 
@@ -62,6 +67,7 @@
     top: 0px;
     right: 0;
     width: 50%;
+    z-index: 10;
     height: calc(100vh);
     background-color: var(--bg);
     display: flex;

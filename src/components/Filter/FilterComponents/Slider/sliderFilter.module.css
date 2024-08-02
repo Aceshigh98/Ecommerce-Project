@@ -1,30 +1,85 @@
 .sliderContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .values {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .values span {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .sliders {
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .slider {
-    width: 100%;
-    margin: 0 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.values {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.values span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sliders {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+
+.slider {
+  -webkit-appearance: none; /* Remove default styling */
+  width: 100%;
+  height: 8px; /* Height of the track */
+  margin: 0 10px;
+  background: #ddd; /* Track color */
+  outline: none;
+  border-radius: 5px; /* Rounded corners for the track */
+  overflow: hidden; /* To contain the thumb within the track */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; /* Width of the thumb */
+  height: 20px; /* Height of the thumb */
+  border-radius: 50%;
+  background: #4CAF50; /* Thumb color */
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #3e8e41; /* Thumb color on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider::-moz-range-track {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.slider::-ms-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider::-ms-track {
+  width: 100%;
+  height: 8px;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
   

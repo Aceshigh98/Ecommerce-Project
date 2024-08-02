@@ -8,7 +8,8 @@ import { cigarBrands, cigarSize, cigarWrapper } from "@/src/lib/data";
 
 import {
   handleSizeChange,
-  handlePriceChange,
+  handlePriceChangeLow,
+  handlePriceChangeHigh,
   handleBrandChange,
   handleWrapperChange,
 } from "@/src/utils/search";
@@ -28,7 +29,8 @@ const Filter = ({ filter, setFilter }) => {
     <div className={styles.filterContainer}>
       <Slider
         maxPrice={filter.maxPrice}
-        onPriceChange={(e) => handlePriceChange(e, setFilter)}
+        onPriceChangeLow={(e) => handlePriceChangeLow(e, setFilter)}
+        onPriceChangeHigh={(e) => handlePriceChangeHigh(e, setFilter)}
         selectedValue={filter.priceTarget}
       />
       <RadioFilter

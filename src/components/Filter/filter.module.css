@@ -1,6 +1,6 @@
 
 .filterContainer {
-height: 100vh;
+height: fit-content;
 width: 500px;
 display: flex;
 gap: 10px;
@@ -9,6 +9,7 @@ align-items: center;
 border-top: 1px solid lightgrey;
 padding: 10px;
 }  
+
 
 .clear{
     width: 100%;
@@ -21,5 +22,5 @@ padding: 10px;
     align-items: center;
     border-radius: 10px;
     border: none;
+    background-color: var(--btn);
 }
-

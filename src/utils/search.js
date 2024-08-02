@@ -3,7 +3,7 @@ export const filterObject = {
   size: "",
   brand: "",
   wrapper: "",
-  priceTarget: undefined,
+  priceTarget: [0, 0],
   minPrice: undefined,
   maxPrice: undefined,
 };
@@ -56,10 +56,18 @@ export const handleBrandChange = (e, setFilter) => {
 };
 
 //Price for single filter
-export const handlePriceChange = (e, setFilter) => {
+export const handlePriceChangeLow = (e, setFilter) => {
   setFilter((prev) => ({
     ...prev,
-    priceTarget: e,
+    priceTarget: [e, prev.priceTarget[1]],
+  }));
+};
+
+//Price for single filter
+export const handlePriceChangeHigh = (e, setFilter) => {
+  setFilter((prev) => ({
+    ...prev,
+    priceTarget: [prev.priceTarget[0], e],
   }));
 };
 

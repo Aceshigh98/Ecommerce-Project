@@ -4,8 +4,14 @@
  height: fit-content;   
  display: flex;
  position: relative;
- background-color: var(--bg);
  margin-top: 200px;
- z-index: 2;
+ background-color: var(--bg);
  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
 }
