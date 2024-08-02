@@ -14,7 +14,7 @@ import {
   handleWrapperChange,
 } from "@/src/utils/search";
 
-const Filter = ({ filter, setFilter }) => {
+const Filter = ({ filter, setFilter, active }) => {
   const clearFilterHandler = () => {
     setFilter((prev) => ({
       ...prev,

@@ -14,7 +14,7 @@
 
 .values span {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: bold;;
 }
 
 .sliders {
@@ -80,6 +80,31 @@
   background: transparent;
   border-color: transparent;
   color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  .sliderContainer {
+    width: 90%;
+  }
+  .values {
+    font-size: 16px;
+  }
+  .slider {
+    height: 10px;
+  }
+  .slider::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+  }
+  .slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+  }
+  .slider::-ms-thumb {
+    width: 15px;
+    height: 15px;
+  }
+  
 }
 
   

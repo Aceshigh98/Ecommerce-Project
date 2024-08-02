@@ -21,6 +21,24 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/error.jsx", "src/components/SignatureSelects/Selects.jsx", "src/components/Filter/FilterComponents/Radio/Footer/footer.jsx", "src/components/Navbar/navbar.jsx", "src/components/Navbar/Links/navLink/navLink.jsx", "src/components/Navbar/Links/Links.jsx", "src/app/page.tsx", "src/app/layout.tsx", "src/lib/action.js", "src/lib/data.ts", "src/lib/auth.js", "src/lib/database.js", "src/lib/models.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/app/error.jsx",
+    "src/components/SignatureSelects/Selects.jsx",
+    "src/components/Footer/footer.jsx",
+    "src/components/Navbar/navbar.jsx",
+    "src/components/Navbar/Links/navLink/navLink.jsx",
+    "src/components/Navbar/Links/Links.jsx",
+    "src/app/page.tsx",
+    "src/app/layout.tsx",
+    "src/lib/action.js",
+    "src/lib/data.ts",
+    "src/lib/auth.js",
+    "src/lib/database.js",
+    "src/lib/models.js"
+  ],
   "exclude": ["node_modules"]
 }

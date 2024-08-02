@@ -3,7 +3,6 @@
  width: 100%;
  height: fit-content;   
  display: flex;
- position: relative;
  margin-top: 200px;
  background-color: var(--bg);
  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -12,6 +11,6 @@
 @media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
+        margin-top: 100px;
     }
-    
 }

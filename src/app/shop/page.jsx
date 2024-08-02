@@ -15,9 +15,7 @@ import { filterObject, filterMain, maxPrice } from "@/src/utils/search";
 const Shop = () => {
   //Fetch Products from database eventusally.
   //const products = await getProducts();
-
-  const initialWidth = window.innerWidth < 768;
-  const [width, setWidth] = useState(initialWidth);
+  const [width, setWidth] = useState(null);
   const [filter, setFilter] = useState(() => {
     const maxPriceValue = maxPrice(productsStore);
     return {
@@ -41,10 +39,11 @@ const Shop = () => {
       setWidth(window.innerWidth < 768);
     };
     window.addEventListener("resize", handleResize);
+    handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [width]);
 
   return (
     <div className={styles.container}>

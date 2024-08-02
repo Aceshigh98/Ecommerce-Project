@@ -57,7 +57,11 @@ const Links = ({ session }) => {
       {open && (
         <div className={styles.mobileLinks}>
           {links.map((link) => (
-            <Navlink item={link} key={link.name} onClick={setOpen} />
+            <Navlink
+              item={link}
+              key={link.name}
+              onClick={() => setOpen((prev) => !prev)}
+            />
           ))}
         </div>
       )}

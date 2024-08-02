@@ -44,3 +44,14 @@
     border: none;
     background-color: var(--btnHover);
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 75%;
+        border-radius: 10px;
+        justify-content: center;
+    }
+    .button{
+        
+    }
+}

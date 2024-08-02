@@ -24,3 +24,19 @@ padding: 10px;
     border: none;
     background-color: var(--btn);
 }
+
+@media screen and (max-width: 768px) {
+    .filterContainer {
+        align-items: center;
+        backdrop-filter: blur(10px); /* Corrected property */
+        background-color: rgba(0, 0, 0, 0.4); /* Black with 50% opacity */
+        width: 100%;
+        padding: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .clear{
+        width: 90%;
+    }
+    
+}
