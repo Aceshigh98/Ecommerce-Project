@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./selects.module.css";
 import Card from "../Card/Card";
-import { getPosts } from "@/src/lib/data";
+import { getSignatureProducts } from "@/src/lib/data";
 
 const SignatureSelects = async () => {
-  const cards = await getPosts();
+  const cards = getSignatureProducts();
 
   return (
     <div className={styles.container}>

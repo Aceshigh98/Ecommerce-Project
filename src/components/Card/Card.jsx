@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./card.module.css";
+import Link from "next/link";
 
 const Card = ({ item }) => {
   return (
@@ -12,7 +13,9 @@ const Card = ({ item }) => {
         <h3>{item.title}</h3>
         <p>{item.body}</p>
       </div>
-      <button className={styles.cardButton}>View</button>
+      <button className={styles.cardButton}>
+        <Link href={`/store/${item.id}`}>View</Link>
+      </button>
     </div>
   );
 };

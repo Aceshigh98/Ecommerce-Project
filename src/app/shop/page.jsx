@@ -9,29 +9,30 @@ import MobileFilter from "@/src/components/MobileFilter/MobileFilter";
 import Products from "@/src/components/Products/Products";
 
 //Functions
-import { productsStore } from "@/src/lib/data";
+import { getStoreProducts } from "@/src/lib/data";
 import { filterObject, filterMain, maxPrice } from "@/src/utils/search";
 
 const Shop = () => {
   //Fetch Products from database eventusally.
-  //const products = await getProducts();
+  const products = getStoreProducts();
+
   const [width, setWidth] = useState(null);
   const [filter, setFilter] = useState(() => {
-    const maxPriceValue = maxPrice(productsStore);
+    const maxPriceValue = maxPrice(products);
     return {
       ...filterObject,
       maxPrice: maxPriceValue,
     };
   });
-  const [filteredProducts, setFilteredProducts] = useState(productsStore);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
   // Effect to filter products whenever filter state changes
   useEffect(() => {
-    const filtered = productsStore.filter((product) => {
+    const filtered = products.filter((product) => {
       return filterMain(product, filter);
     });
     setFilteredProducts(filtered);
-  }, [filter]);
+  }, [filter, products]);
 
   // Effect to check window size and set width state
   useEffect(() => {

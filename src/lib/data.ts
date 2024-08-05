@@ -12,7 +12,7 @@ const user = [
     },
 ]
 
-export const products = [
+ const signatureProducts = [
     {
         id: 1,
         title: "Cohiba Cigars",
@@ -47,7 +47,7 @@ export const products = [
     },
     ];
 
-    export const productsStore = [
+     const productsStore = [
         {
             id: 1,
             title: "Cohiba Cigars",
@@ -195,12 +195,16 @@ export const products = [
         type:["Conneticut", "Equadorian Sumatra", "Maduro", "USA Conneticut"]}
 
 
-export const getPosts = () => {
-    return products;
+export const getSignatureProducts = () => {
+    return signatureProducts;
 }
 
-export const getPost = (id: number) => {
-    return products.find(post => post.id === id);
+export const getStoreProducts = () => {
+    return productsStore;
+}
+
+export const getProduct = (id: number) => {
+    return productsStore.find(post => post.id === id);
 }
 
 export const getUser = (id: number) => {
