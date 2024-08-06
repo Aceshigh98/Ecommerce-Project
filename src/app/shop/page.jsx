@@ -1,68 +1,16 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import React from "react";
+import Shop from "@/src/components/ShopComponent/Shop";
+import { getAllProducts } from "@/src/lib/data";
 import styles from "./shop.module.css";
 
-// Components
-import Filter from "@/src/components/Filter/Filter";
-import MobileFilter from "@/src/components/MobileFilter/MobileFilter";
-import Products from "@/src/components/Products/Products";
-
-// Functions
-import { getAllProducts } from "@/src/lib/data";
-import { filterObject, filterMain, maxPrice } from "@/src/utils/search";
-
-const Shop = () => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [width, setWidth] = useState(null);
-  const [filter, setFilter] = useState(filterObject);
-
-  // Fetch products from database
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const fetchedProducts = await getAllProducts();
-        setProducts(fetchedProducts);
-        const maxPriceValue = maxPrice(fetchedProducts);
-        setFilter({ ...filterObject, maxPrice: maxPriceValue });
-        setFilteredProducts(fetchedProducts);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  // Effect to filter products whenever filter state changes
-  useEffect(() => {
-    const filtered = products.filter((product) => filterMain(product, filter));
-    setFilteredProducts(filtered);
-  }, [filter, products]);
-
-  // Effect to check window size and set width state
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+const page = async () => {
+  const products = await getAllProducts();
 
   return (
     <div className={styles.container}>
-      {width ? (
-        <MobileFilter filter={filter} setFilter={setFilter} />
-      ) : (
-        <Filter filter={filter} setFilter={setFilter} />
-      )}
-      <Products products={filteredProducts} />
+      <Shop products={products} />
     </div>
   );
 };
 
-export default Shop;
+export default page;

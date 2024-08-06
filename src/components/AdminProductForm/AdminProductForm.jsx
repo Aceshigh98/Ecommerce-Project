@@ -5,7 +5,7 @@ import styles from "./adminProductForm.module.css";
 import { useFormState } from "react-dom";
 import { addProduct } from "@/src/lib/action";
 
-const AdminProductForm = () => {
+const AdminProductForm = ({ cigarSize, cigarBrands, cigarWrapper }) => {
   const [state, formAction] = useFormState(addProduct, undefined);
   const [base64Image, setBase64] = useState(null);
 
@@ -39,9 +39,30 @@ const AdminProductForm = () => {
         placeholder="Description"
         required
       />
-      <input type="text" name="size" placeholder="Size" required />
-      <input type="text" name="wrapper" placeholder="Wrapper" required />
-      <input type="text" name="brand" placeholder="Brand" required />
+      <select name="size" required>
+        <option value="">Size</option>
+        {cigarSize.type.map((size) => (
+          <option key={size} value={size}>
+            {size}
+          </option>
+        ))}
+      </select>
+      <select name="wrapper" required>
+        <option value="">Wrapper</option>
+        {cigarWrapper.type.map((wrapper) => (
+          <option key={wrapper} value={wrapper}>
+            {wrapper}
+          </option>
+        ))}
+      </select>
+      <select name="brand" required>
+        <option value="">Brand</option>
+        {cigarBrands.type.map((brand) => (
+          <option key={brand} value={brand}>
+            {brand}
+          </option>
+        ))}
+      </select>
       <input
         type="number"
         name="priceForSingle"

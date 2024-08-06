@@ -6,7 +6,7 @@ interface Connection {
     isConnected?: number;
 }
 
-const connection: Connection = {};
+const connection: Connection = {}
 
 export const connectDb = async ():Promise<void> => {
     try {
@@ -18,6 +18,9 @@ export const connectDb = async ():Promise<void> => {
         if (!process.env.MONGO) {
             throw new Error('MongoDB connection string not found');
         }
+
+        console.log("MongoDB Connection String:", process.env.MONGO);
+
 
         const db = await mongoose.connect(process.env.MONGO);
         connection.isConnected = db.connections[0].readyState;
