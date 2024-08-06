@@ -4,7 +4,11 @@ import Card from "../Card/Card";
 import { getSignatureProducts } from "@/src/lib/data";
 
 const SignatureSelects = async () => {
-  const cards = getSignatureProducts();
+  const cards = await getSignatureProducts();
+
+  if (!cards) return <div>Loading...</div>;
+
+  console.log(cards);
 
   return (
     <div className={styles.container}>

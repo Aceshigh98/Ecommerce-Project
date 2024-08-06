@@ -3,34 +3,41 @@
 import React, { useState, useEffect } from "react";
 import styles from "./shop.module.css";
 
-//Components
+// Components
 import Filter from "@/src/components/Filter/Filter";
 import MobileFilter from "@/src/components/MobileFilter/MobileFilter";
 import Products from "@/src/components/Products/Products";
 
-//Functions
-import { getStoreProducts } from "@/src/lib/data";
+// Functions
+import { getAllProducts } from "@/src/lib/data";
 import { filterObject, filterMain, maxPrice } from "@/src/utils/search";
 
 const Shop = () => {
-  //Fetch Products from database eventusally.
-  const products = getStoreProducts();
-
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [width, setWidth] = useState(null);
-  const [filter, setFilter] = useState(() => {
-    const maxPriceValue = maxPrice(products);
-    return {
-      ...filterObject,
-      maxPrice: maxPriceValue,
+  const [filter, setFilter] = useState(filterObject);
+
+  // Fetch products from database
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const fetchedProducts = await getAllProducts();
+        setProducts(fetchedProducts);
+        const maxPriceValue = maxPrice(fetchedProducts);
+        setFilter({ ...filterObject, maxPrice: maxPriceValue });
+        setFilteredProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
-  });
-  const [filteredProducts, setFilteredProducts] = useState(products);
+
+    fetchProducts();
+  }, []);
 
   // Effect to filter products whenever filter state changes
   useEffect(() => {
-    const filtered = products.filter((product) => {
-      return filterMain(product, filter);
-    });
+    const filtered = products.filter((product) => filterMain(product, filter));
     setFilteredProducts(filtered);
   }, [filter, products]);
 
@@ -44,7 +51,7 @@ const Shop = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [width]);
+  }, []);
 
   return (
     <div className={styles.container}>

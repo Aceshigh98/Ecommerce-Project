@@ -1,9 +1,8 @@
 
 import mongoose from 'mongoose';
 
-const productsSchema = new mongoose.Schema(
+const productSchema = new mongoose.Schema(
     {
-        id: { type: String, required: true, unique: true },
         title: { type: String, required: true },
         body: { type: String, required: true },
         size : { type: String, required: true },
@@ -13,7 +12,8 @@ const productsSchema = new mongoose.Schema(
         priceForBox: { type: Number, required: true },
         singleInStock: { type: Number, required: true },
         boxInStock: { type: Number, required: true },
-        img: { type: String, required: true },
+        img: { type: String, required: false },
+        signature: { type: Boolean, required: true, default: false },
     },
     {
         timestamps: true,
@@ -30,5 +30,5 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-export const Product = mongoose.models?.Product || mongoose.model('Product', productsSchema);
+export const Product = mongoose.models?.Product || mongoose.model('Product', productSchema);
 export const User = mongoose.models?.User || mongoose.model('User', userSchema);

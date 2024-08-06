@@ -37,7 +37,7 @@
     "src/lib/action.js",
     "src/lib/data.ts",
     "src/lib/auth.js",
-    "src/lib/database.js",
+    "src/lib/database.ts",
     "src/lib/models.js"
   ],
   "exclude": ["node_modules"]

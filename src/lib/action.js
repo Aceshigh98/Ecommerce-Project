@@ -1,8 +1,9 @@
 "use server";
 import { connectDb } from "./database";
-import { User } from "./models";
+import { User, Product } from "./models";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcryptjs";
+import { revalidatePath } from "next/cache";
 
 //Login function
 export const login = async (previousState, formData) => {
@@ -71,4 +72,120 @@ export const handleGoogleLogin = async () => {
 export const handleLogout = async () => {
   "use server";
   await signOut();
+};
+
+//Add new user from admin page.
+
+export const addUser = async (prevState, formData) => {
+  const { username, name, email, password, isAdmin } =
+    Object.fromEntries(formData);
+
+  if (!username || !name || !email || !password) {
+    return { error: "Please fill in all required fields" };
+  }
+
+  const checkUserName = await User.findOne({ username });
+  const checkEmail = await User.findOne({ email });
+
+  if (checkUserName) {
+    return { error: "Username already exists" };
+  }
+
+  if (checkEmail) {
+    return { error: "Email already exists" };
+  }
+
+  try {
+    connectDb();
+
+    const newUser = new User({
+      username,
+      name,
+      email,
+      password,
+      isAdmin,
+    });
+
+    await newUser.save();
+    revalidatePath("/admin");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+};
+
+//Delete user function from admin page
+
+export const deleteUser = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectDb();
+    await User.findByIdAndDelete(id);
+    revalidatePath("/admin");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+};
+
+// Add product from admin page.
+
+export const addProduct = async (prevState, formData) => {
+  const {
+    title,
+    body,
+    size,
+    wrapper,
+    brand,
+    priceForSingle,
+    priceForBox,
+    singleInStock,
+    boxInStock,
+    img,
+    signature,
+  } = Object.fromEntries(formData);
+
+  if (!title || !body || !size || !wrapper || !brand || !priceForSingle) {
+    return { error: "Please fill in all required fields" };
+  }
+
+  try {
+    connectDb();
+
+    const newProduct = new Product({
+      title,
+      body,
+      size,
+      wrapper,
+      brand,
+      priceForSingle,
+      priceForBox,
+      singleInStock,
+      boxInStock,
+      img,
+      signature,
+    });
+
+    await newProduct.save();
+    revalidatePath("/admin");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+};
+
+//Delete product function from admin page
+
+export const deleteProduct = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectDb();
+    await Product.findByIdAndDelete(id);
+    revalidatePath("/admin");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
 };
