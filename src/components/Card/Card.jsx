@@ -13,9 +13,9 @@ const Card = ({ item }) => {
         <h3>{item.title}</h3>
         <p>{item.body}</p>
       </div>
-      <button className={styles.cardButton}>
-        <Link href={`shop/${item.id}`}>View</Link>
-      </button>
+      <Link href={`/shop/${item._id}`}>
+        <button className={styles.cardButton}>View</button>
+      </Link>
     </div>
   );
 };

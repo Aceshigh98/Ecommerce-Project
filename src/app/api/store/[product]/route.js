@@ -1,17 +1,16 @@
-import connectDb from "@/src/lib/database";
+import { connectDb } from "@/src/lib/database";
 import { NextResponse } from "next/server";
 import { Product } from "@/src/lib/models";
 
 export const GET = async (request, { params }) => {
-  console.log("Params----" + params.id);
   const { id } = params;
 
-  console.log("ID----" + id);
+  console.log(id);
 
   try {
-    connectDb();
+    await connectDb();
 
-    const product = await Product.findOne({ id });
+    const product = await Product.findOne(id).lean();
     return NextResponse.json(product);
   } catch (err) {
     console.log(err);
@@ -23,9 +22,9 @@ export const DELETE = async (request, { params }) => {
   const { id } = params;
 
   try {
-    connectDb();
+    await connectDb();
 
-    await Product.deleteOne({ id });
+    await Product.deleteOne(id);
     return NextResponse.json("Product deleted");
   } catch (err) {
     console.log(err);

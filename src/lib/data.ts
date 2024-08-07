@@ -41,7 +41,8 @@ export const getAllProducts = async () => {
     }
 }
 
-export const getProduct = async (id: number) => {
+export const getProduct = async (id: string) => {
+    unstable_noStore();
     try{
         await connectDb();
         const product = await Product.findById(id);
