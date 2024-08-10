@@ -1,6 +1,6 @@
 "use server";
 import { connectDb } from "./database";
-import { User, Product } from "./models";
+import { User, Product, Cart } from "./models";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
@@ -187,5 +187,31 @@ export const deleteProduct = async (formData) => {
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
+  }
+};
+
+//add cart items to user
+
+export const addToCart = async (previousState, formData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectDb();
+    const cart = await Cart.findById(id);
+    if (!cart) {
+      const newCart = new Cart({
+        user: id,
+        cart: [{ product: id, quantity }],
+      });
+      await newCart.save();
+      revalidatePath("/cart");
+      return;
+    }
+    cart.cart.push({ product: id, quantity });
+    await cart.save();
+    revalidatePath("/cart");
+  } catch (err) {
+    console.log(err);
+    return { error: "Adding to cart went wrong!" };
   }
 };

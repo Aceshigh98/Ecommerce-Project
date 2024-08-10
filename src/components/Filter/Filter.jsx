@@ -27,6 +27,9 @@ const Filter = ({ filter, setFilter, active }) => {
 
   return (
     <div className={styles.filterContainer}>
+      <button className={styles.clear} onClick={clearFilterHandler}>
+        Clear Filters
+      </button>
       <Slider
         maxPrice={filter.maxPrice}
         onPriceChangeLow={(e) => handlePriceChangeLow(e, setFilter)}
@@ -48,10 +51,6 @@ const Filter = ({ filter, setFilter, active }) => {
         onChange={(e) => handleWrapperChange(e, setFilter)}
         selectedValue={filter.wrapper}
       />
-
-      <button className={styles.clear} onClick={clearFilterHandler}>
-        Clear Filters
-      </button>
     </div>
   );
 };

@@ -11,7 +11,7 @@ import Products from "@/src/components/Products/Products";
 // Functions
 import { filterObject, filterMain, maxPrice } from "@/src/utils/search";
 
-const Shop = ({ products }) => {
+const Shop = ({ products, session }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [width, setWidth] = useState(null);
   const [filter, setFilter] = useState(filterObject);
