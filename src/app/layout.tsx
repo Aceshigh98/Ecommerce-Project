@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import  "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import "./globals.css";
 import Navbar from "../components/Navbar/navbar";
 import Footer from "../components/Footer/footer";
 
-const roboto = Roboto({ 
-  weight: '700',
-  subsets: ["latin"] });
+const roboto = Roboto({
+  weight: "700",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Aces Cigars",
@@ -22,9 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <div className="container">
-          <Navbar />
-          {children}
-          <Footer />
+          <SessionProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </SessionProvider>
         </div>
       </body>
     </html>

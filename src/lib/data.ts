@@ -22,8 +22,8 @@ export const cigarWrapper = {
 export const getSignatureProducts = async () => {
   try {
     await connectDb();
-    const signatureProducts = await Product.find({ signature: true });
-    return signatureProducts;
+    const signatureProducts = await Product.find({ signature: true }).lean();
+    return convertId(signatureProducts);
   } catch (error) {
     throw new Error("Failed to fetch signature products!");
   }

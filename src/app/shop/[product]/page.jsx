@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import styles from "./product.module.css";
 import Image from "next/image";
 import { getProduct } from "@/src/lib/data";
+import AddItem from "@/src/components/AddItem/AddItem";
 
 const getData = async (id) => {
   const res = await fetch(`http://localhost:3000/api/store/${id}`, {
@@ -31,8 +32,6 @@ const SinglePage = async ({ params }) => {
 
   const product = await getProduct(_id);
 
-  console.log("PRODUCT........ " + product);
-
   if (!product) {
     return <div>Product not found</div>;
   }
@@ -47,7 +46,6 @@ const SinglePage = async ({ params }) => {
               alt={product.title}
               width={500}
               height={500}
-              className={styles.img}
             />
           </Suspense>
         </div>
@@ -56,13 +54,31 @@ const SinglePage = async ({ params }) => {
         <h1 className={styles.title}>{product.title}</h1>
         <div className={styles.detail}>
           <div className={styles.detailText}>
-            <span className={styles.detailTitle}>Published</span>
-            <span className={styles.detailValue}>
-              {new Date(product.createdAt).toDateString()}
+            <span className={styles.detailTitle}>Availability</span>
+            <span
+              className={
+                product.singleInStock > 0
+                  ? styles.detailValue
+                  : styles.detailValue2
+              }
+            >
+              Singles:
+              {product.singleInStock > 0 ? " In Stock" : " Out of Stock"}
+            </span>
+            <span
+              className={
+                product.boxInStock > 0
+                  ? styles.detailValue
+                  : styles.detailValue2
+              }
+            >
+              Boxes:
+              {product.boxInStock > 0 ? " In Stock" : " Out of Stock"}
             </span>
           </div>
         </div>
         <div className={styles.content}>{product.body}</div>
+        <AddItem item={product} />
       </div>
     </div>
   );

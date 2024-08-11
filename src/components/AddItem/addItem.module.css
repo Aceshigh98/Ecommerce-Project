@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.quantityControls {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  justify-content: space-around;
+}
+
+.arrowButton {
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 50px;
+  border-radius: 0.25rem;
+}

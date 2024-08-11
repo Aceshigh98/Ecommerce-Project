@@ -8,13 +8,14 @@ const SignatureSelects = async () => {
 
   if (!cards) return <div>Loading...</div>;
 
-  console.log(cards);
-
   return (
     <div className={styles.container}>
-      {cards.map((card) => (
-        <Card key={card.id} item={card} />
-      ))}
+      <h1 className={styles.title}>Signature Selects</h1>
+      <div className={styles.cardWrapper}>
+        {cards.map((card) => (
+          <Card key={card.id} item={card} />
+        ))}
+      </div>
     </div>
   );
 };
