@@ -15,14 +15,14 @@ const Card = ({ item }) => {
         <h3>{item.title}</h3>
       </div>
       <div className={styles.priceContainer}>
-        <Link href={`/shop/${item._id}`}>
-          <button className={styles.cardButton}>View</button>
-        </Link>
         <h3>Single: ${item.priceForSingle}</h3>
         <h3>
           Box: <span>${item.priceForBox}</span>
         </h3>
       </div>
+      <Link href={`/shop/${item._id}`}>
+        <button className={styles.cardButton}>View</button>
+      </Link>
     </div>
   );
 };

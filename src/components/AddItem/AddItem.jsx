@@ -2,14 +2,13 @@
 
 import React, { useState } from "react";
 import styles from "./addItem.module.css";
-import { useFormState } from "react-dom";
-import { addToCart as addToCartAction } from "@/src/lib/action";
+import { addToCart } from "@/src/lib/action";
 import { useSession } from "next-auth/react";
 
 const AddItem = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("single");
-  const [state, formAction] = useFormState(addToCartAction, undefined);
+
   const { data: session } = useSession();
 
   const increaseQuantity = () => {
@@ -25,14 +24,15 @@ const AddItem = ({ item }) => {
     setSize(e.target.value);
   };
 
-  const addToCart = async (e) => {
+  const cartAction = async (e) => {
     e.preventDefault();
+
     try {
-      await formAction({
+      await addToCart({
         item,
         quantity,
         size,
-        id: session.email,
+        id: session.user.email,
       });
     } catch (error) {
       console.error("Failed to add to cart:", error);
@@ -40,7 +40,7 @@ const AddItem = ({ item }) => {
   };
 
   return (
-    <form onSubmit={addToCart} className={styles.container}>
+    <form onSubmit={cartAction} className={styles.container}>
       <div className={styles.quantityControls}>
         <button
           type="button"

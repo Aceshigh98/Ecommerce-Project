@@ -34,7 +34,7 @@ export const register = async (previousState, formData) => {
 
   try {
     //connect to db
-    connectDb();
+    await connectDb();
     const user = await User.findOne({ username });
 
     //check if user already exists
@@ -96,7 +96,7 @@ export const addUser = async (prevState, formData) => {
   }
 
   try {
-    connectDb();
+    await connectDb();
 
     const newUser = new User({
       username,
@@ -120,7 +120,7 @@ export const deleteUser = async (formData) => {
   const { id } = Object.fromEntries(formData);
 
   try {
-    connectDb();
+    await connectDb();
     await User.findByIdAndDelete(id);
     revalidatePath("/admin");
   } catch (err) {
@@ -151,7 +151,7 @@ export const addProduct = async (prevState, formData) => {
   }
 
   try {
-    connectDb();
+    await connectDb();
 
     const newProduct = new Product({
       title,
@@ -181,7 +181,7 @@ export const deleteProduct = async (formData) => {
   const { id } = Object.fromEntries(formData);
 
   try {
-    connectDb();
+    await connectDb();
     await Product.findByIdAndDelete(id);
     revalidatePath("/admin");
   } catch (err) {
@@ -192,22 +192,27 @@ export const deleteProduct = async (formData) => {
 
 //add cart items to user
 
-export const addToCart = async (previousState, formData) => {
-  const { id } = Object.fromEntries(formData);
+export const addToCart = async (data) => {
+  if (!data.id || !data.item || !data.quantity || !data.size) {
+    return { error: "Missing required fields" };
+  }
+
+  const { id, item, quantity, size } = data;
 
   try {
-    connectDb();
-    const cart = await Cart.findById(id);
+    await connectDb();
+    const cart = await Cart.findOne({ userId: id });
     if (!cart) {
       const newCart = new Cart({
-        user: id,
-        cart: [{ product: id, quantity }],
+        userId: id,
+        cart: [{ product: item._id, quantity, size }],
       });
+      console.log(newCart);
       await newCart.save();
       revalidatePath("/cart");
       return;
     }
-    cart.cart.push({ product: id, quantity });
+    cart.cart.push({ product: item._id, quantity, size });
     await cart.save();
     revalidatePath("/cart");
   } catch (err) {

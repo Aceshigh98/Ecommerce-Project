@@ -10,7 +10,7 @@ const Navbar = async () => {
   return (
     <nav className={styles.container}>
       <Image
-        src="/cigarasset13.png"
+        src="/logo.png"
         alt=""
         width={150}
         height={150}

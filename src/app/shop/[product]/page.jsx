@@ -44,8 +44,8 @@ const SinglePage = async ({ params }) => {
             <Image
               src={product.img}
               alt={product.title}
-              width={500}
-              height={500}
+              layout="fill"
+              objectFit="cover"
             />
           </Suspense>
         </div>

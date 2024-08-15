@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
 const userCartSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true },
-    cart: { type: Array, required: true },
+    cart: { type: Array, required: true, default: [] },
   },
   {
     timestamps: true,
