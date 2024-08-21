@@ -20,10 +20,6 @@ const links = [
     name: "Contact",
     path: "/contact",
   },
-  {
-    name: "Checkout",
-    path: "/checkout",
-  },
 ];
 
 const Links = ({ session }) => {
@@ -37,6 +33,10 @@ const Links = ({ session }) => {
         {links.map((link) => (
           <Navlink item={link} key={link.name} />
         ))}
+        <div>
+          <Navlink item={{ name: "Checkout", path: "/checkout" }} />
+          <div>0</div>
+        </div>
         {session?.user ? (
           <>
             {session.user?.isAdmin && (
