@@ -30,7 +30,7 @@ const ContactForm = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Image src="/cigarasset13.png" alt="contact" width={250} height={250} />
+      <Image src="/logo.png" alt="contact" width={250} height={250} />
       <p>Send us a message</p>
       <form ref={form} onSubmit={sendEmail} className={styles.form}>
         <div className={styles.innerWrapper}>

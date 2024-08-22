@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./Links.module.css";
 import Navlink from "./NavLink/NavLink";
 import { FiMenu } from "react-icons/fi";
 import { handleLogout } from "@/src/lib/action";
+import { FaShoppingCart } from "react-icons/fa";
 
 const links = [
   {
@@ -23,9 +25,34 @@ const links = [
 ];
 
 const Links = ({ session }) => {
-  // TEMPORARY
-
   const [open, setOpen] = useState(false);
+  const [cartLength, setCartLength] = useState(0);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      const res = await fetch(
+        `http://localhost:3000/api/cart/${session.user.email}`,
+        {
+          method: "GET",
+          revalidate: 3600,
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      const data = await res.json();
+      setCartLength(data.cart.length);
+    };
+
+    fetchCart();
+  }, [session]);
+
+  const handleCart = () => {
+    if (cartLength > 0) router.push("/checkout");
+  };
 
   return (
     <div className={styles.container}>
@@ -33,10 +60,16 @@ const Links = ({ session }) => {
         {links.map((link) => (
           <Navlink item={link} key={link.name} />
         ))}
-        <div>
-          <Navlink item={{ name: "Checkout", path: "/checkout" }} />
-          <div>0</div>
+
+        <Navlink item={{ name: "Checkout", path: "/checkout" }}> </Navlink>
+        <div
+          onClick={handleCart}
+          className={cartLength > 0 ? styles.cart : styles.cartActive}
+        >
+          <FaShoppingCart />
+          <div>{cartLength}</div>
         </div>
+
         {session?.user ? (
           <>
             {session.user?.isAdmin && (

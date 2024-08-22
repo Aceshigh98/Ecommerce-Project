@@ -1,31 +1,15 @@
-import { connectDb } from "@lib/database";
+import { connectDb } from "@/src/lib/database";
 import { NextResponse } from "next/server";
-import { Cart } from "@lib/models";
+import { Cart } from "@/src/lib/models";
 
-export const GET = async (request, { params }) => {
-  const { id } = params;
-
+export const GET = async (request) => {
   try {
     connectDb();
 
-    const cart = await Cart.findOne(id).lean();
+    const cart = await Cart.find();
     return NextResponse.json(cart);
   } catch (err) {
     console.log(err);
     throw new Error("Failed to fetch cart!");
-  }
-};
-
-export const DELETE = async (request, { params }) => {
-  const { id } = params;
-
-  try {
-    connectDb();
-
-    await Cart.deleteOne(id);
-    return NextResponse.json("Cart deleted");
-  } catch (err) {
-    console.log(err);
-    throw new Error("Failed to delete cart!");
   }
 };

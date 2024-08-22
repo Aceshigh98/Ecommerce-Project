@@ -40,7 +40,6 @@ export const getAllProducts = async () => {
 };
 
 export const getProduct = async (id: string) => {
-  unstable_noStore();
   try {
     await connectDb();
     const product = await Product.findById(id);
@@ -53,7 +52,7 @@ export const getProduct = async (id: string) => {
 //User schema actions.
 
 export const getAllUsers = async () => {
-  unstable_noStore();
+
   try {
     await connectDb();
     const users = await User.find().lean();
@@ -64,7 +63,7 @@ export const getAllUsers = async () => {
 };
 
 export const getUser = async (id: number) => {
-  unstable_noStore();
+  
   try {
     await connectDb();
     const user = await User.findById(id);
@@ -77,11 +76,10 @@ export const getUser = async (id: number) => {
 //Cart schema actions.
 
 export const getCartItems = async (userId: string) => {
-  unstable_noStore();
   try {
     await connectDb();
-    const user = await Cart.findById(userId);
-    return user.cart;
+    const cart = await Cart.findOne({userId});
+    return cart;
   } catch (error) {
     throw new Error("Failed to fetch cart items!");
   }

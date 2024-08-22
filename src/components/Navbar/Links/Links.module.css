@@ -8,8 +8,42 @@
 }
 
 .links {
+  width: fit-content;
   display: flex;
   gap: 20px;
+}
+
+.checkoutContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 50px;
+  background-color: red;
+  border-radius: 10px;
+}
+
+.cart {
+  background-color: red;
+  border-radius: 100px;
+  color: white;
+  position: relative;
+  width: 25px;
+  padding: 8px;
+  display: flex;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.cartActive {
+  background-color: none;
+  border-radius: 100px;
+  color: black;
+  position: relative;
+  width: 25px;
+  padding: 8px;
+  display: flex;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .logout {

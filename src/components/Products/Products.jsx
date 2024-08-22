@@ -6,7 +6,7 @@ import Image from "next/image";
 const Products = ({ products }) => {
   return (
     <main className={styles.productsContainer}>
-      <div classname={styles.image}>
+      <div className={styles.image}>
         <Image
           src="/logo.png"
           alt="logo"
