@@ -14,7 +14,7 @@ import {
   handleWrapperChange,
 } from "@/src/utils/search";
 
-const Filter = ({ filter, setFilter, active }) => {
+const Filter = ({ filter, setFilter }) => {
   const clearFilterHandler = () => {
     setFilter((prev) => ({
       ...prev,
@@ -34,22 +34,22 @@ const Filter = ({ filter, setFilter, active }) => {
         maxPrice={filter.maxPrice}
         onPriceChangeLow={(e) => handlePriceChangeLow(e, setFilter)}
         onPriceChangeHigh={(e) => handlePriceChangeHigh(e, setFilter)}
-        selectedValue={filter.priceTarget}
+        selectedValue={filter.priceTarget || [0, filter.maxPrice]}
       />
       <RadioFilter
         items={cigarBrands}
         onChange={(e) => handleBrandChange(e, setFilter)}
-        selectedValue={filter.brand}
+        selectedValue={filter.brand || ""}
       />
       <RadioFilter
         items={cigarSize}
         onChange={(e) => handleSizeChange(e, setFilter)}
-        selectedValue={filter.size}
+        selectedValue={filter.size || ""}
       />
       <RadioFilter
         items={cigarWrapper}
         onChange={(e) => handleWrapperChange(e, setFilter)}
-        selectedValue={filter.wrapper}
+        selectedValue={filter.wrapper || ""}
       />
     </div>
   );

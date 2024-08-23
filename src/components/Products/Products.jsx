@@ -17,7 +17,7 @@ const Products = ({ products }) => {
       </div>
       <div className={styles.productWrapper}>
         {products.map((product) => {
-          return <Card key={product.id} item={product} />;
+          return <Card key={product._id} item={product} />;
         })}
       </div>
     </main>

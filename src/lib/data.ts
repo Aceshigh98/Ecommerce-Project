@@ -1,6 +1,5 @@
 import { connectDb } from "@/src/lib/database";
 import { User, Product, Cart } from "@/src/lib/models";
-import { unstable_noStore } from "next/cache";
 import { convertId } from "@/src/utils/utils";
 
 // static data
@@ -84,3 +83,25 @@ export const getCartItems = async (userId: string) => {
     throw new Error("Failed to fetch cart items!");
   }
 };
+
+export const getCheckoutItems = async (userId: string) => {
+
+  try {
+    await connectDb();
+    const cart = await Cart.findOne({userId});
+
+    if (!cart) {
+      throw new Error("Cart is empty!");
+    }
+
+    console.log(cart); 
+
+    const products = await Promise.all(cart.cart.map(async (product: string) => await Product.findOne({_id: product})));
+    return products;
+  } catch (error) {
+    throw new Error("Failed to fetch checkout items!");
+  }
+}
+
+
+

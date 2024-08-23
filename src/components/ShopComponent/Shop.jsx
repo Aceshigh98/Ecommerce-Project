@@ -29,7 +29,7 @@ const Shop = ({ products, session }) => {
     };
 
     fetchProducts();
-  }, []);
+  }, [products]);
 
   // Effect to filter products whenever filter state changes
   useEffect(() => {

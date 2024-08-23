@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <>
       <div className={styles.introContainer}>
-        <Image src="/cigarasset11.png" fill quality={100} alt=""></Image>
+        <Image src="/cigarasset11.png" fill quality={100} alt="cigars"></Image>
         <div className={styles.introTextContainer}>
           <h3>Taste the perfection</h3>
           <h1>
@@ -31,7 +31,8 @@ const Home = () => {
       </div>
       <div className={styles.detailsContainer}>
         <div>
-          <Image src="/cigarasset10.png" fill quality={100} alt=""></Image>
+          <Image src="/cigarasset10.png" fill quality={100} alt="bourbon and cigars" sizes="(max-width: 768px) 100vw, 50vw"
+          priority></Image>
         </div>
         <div className={styles.detailsTextContainer}>
           <h1>GREAT VIBES</h1>

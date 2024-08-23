@@ -3,7 +3,7 @@ export const filterObject = {
   size: "",
   brand: "",
   wrapper: "",
-  priceTarget: [0, 100],
+  priceTarget: [0, 1000],
   minPrice: undefined,
   maxPrice: undefined,
 };

@@ -3,13 +3,11 @@
 import React, { useState } from "react";
 import styles from "./addItem.module.css";
 import { addToCart } from "@/src/lib/action";
-import { useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 const AddItem = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("single");
-
-  const { data: session } = useSession();
 
   const increaseQuantity = () => {
     setQuantity((prev) => prev + 1);
@@ -26,6 +24,15 @@ const AddItem = ({ item }) => {
 
   const cartAction = async (e) => {
     e.preventDefault();
+
+    const session = await getSession();
+    // If there is no session, return
+    if (!session) {
+      console.log("No session found");
+      return;
+    }
+
+    console.log(session);
 
     try {
       await addToCart({

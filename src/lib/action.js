@@ -71,7 +71,7 @@ export const handleGoogleLogin = async () => {
 //Logout function
 export const handleLogout = async () => {
   "use server";
-  await signOut();
+  await signOut({ callbackUrl: "/" });
 };
 
 //Add new user from admin page.

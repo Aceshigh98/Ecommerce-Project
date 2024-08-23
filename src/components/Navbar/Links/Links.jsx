@@ -8,6 +8,7 @@ import Navlink from "./NavLink/NavLink";
 import { FiMenu } from "react-icons/fi";
 import { handleLogout } from "@/src/lib/action";
 import { FaShoppingCart } from "react-icons/fa";
+import { getSession } from "next-auth/react";
 
 const links = [
   {
@@ -30,7 +31,16 @@ const Links = ({ session }) => {
   const router = useRouter();
 
   useEffect(() => {
+    //fetchCart function
     const fetchCart = async () => {
+      const sessionCheck = await getSession();
+
+      if (!sessionCheck) {
+        console.log("No session found");
+        setCartLength(0);
+        return;
+      }
+
       const res = await fetch(
         `http://localhost:3000/api/cart/${session.user.email}`,
         {
@@ -44,12 +54,19 @@ const Links = ({ session }) => {
       }
 
       const data = await res.json();
+
+      if (!data) {
+        setCartLength(0);
+        return;
+      }
+
       setCartLength(data.cart.length);
     };
 
     fetchCart();
   }, [session]);
 
+  //handleCart function
   const handleCart = () => {
     if (cartLength > 0) router.push("/checkout");
   };

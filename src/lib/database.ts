@@ -2,7 +2,6 @@
 import mongoose from 'mongoose';
 
 interface Connection {
-    
     isConnected?: number;
 }
 
