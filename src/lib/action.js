@@ -220,3 +220,27 @@ export const addToCart = async (data) => {
     return { error: "Adding to cart went wrong!" };
   }
 };
+
+//remove cart items from user
+export const deleteFromCart = async (formData) => {
+  if (!formData.id) {
+    return { error: "Missing required id!" };
+  }
+
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    await connectDb();
+    const cart = await Cart.findOne({ _id: id });
+
+    if (!cart) {
+      return { error: "Cart not found!" };
+    }
+
+    await Cart.findByIdAndDelete(id);
+    revalidatePath("/cart");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong!" };
+  }
+};

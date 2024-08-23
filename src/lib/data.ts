@@ -1,6 +1,7 @@
 import { connectDb } from "@/src/lib/database";
 import { User, Product, Cart } from "@/src/lib/models";
 import { convertId } from "@/src/utils/utils";
+import { FlattenMaps, LeanDocument } from "mongoose";
 
 // static data
 export const cigarBrands = {
@@ -86,17 +87,48 @@ export const getCartItems = async (userId: string) => {
 
 export const getCheckoutItems = async (userId: string) => {
 
+  // Define
+  interface Product {
+    _id: string;
+    title: string;
+    size: string;
+    wrapper: string;
+    brand: string;
+    priceForSingle: number;
+    priceForBox: number;
+    quantity: number;
+    img: string;
+    createdAt?: string;
+    updatedAt?: string;
+  }
+
   try {
     await connectDb();
     const cart = await Cart.findOne({userId});
 
+    // If cart is empty, return message
     if (!cart) {
-      throw new Error("Cart is empty!");
+      return "No items in cart!";
     }
 
-    console.log(cart); 
+    // Fetch product details for each item in cart
+    const products = await Promise.all(
+      cart.cart.map(async (item: {product: string, quantity: number}) => { 
+        const productDetails = await Product.findById(item.product).lean() as LeanDocument<FlattenMaps<Product>>;  // Fetch product details by ID
 
-    const products = await Promise.all(cart.cart.map(async (product: string) => await Product.findOne({_id: product})));
+        // If product not found, return message
+        if (!productDetails) {
+          return `Product with ID ${item.product} not found!`;
+        }
+
+        return {
+          ...productDetails,
+          _id: productDetails._id.toString(),
+          quantity: item.quantity,
+        }
+      })
+    );
+        
     return products;
   } catch (error) {
     throw new Error("Failed to fetch checkout items!");

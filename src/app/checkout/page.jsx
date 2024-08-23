@@ -1,15 +1,13 @@
 import React from "react";
-import styles from "./checkout.module.css";
 import CartItems from "@/src/components/CartItems/CartItems";
+import { auth } from "@/src/lib/auth";
 
 export const Checkout = async () => {
+  const session = await auth();
+
   return (
     <div>
-      <CartItems />
-      <div>
-        <h2>Total: $100</h2>
-        <button>Checkout</button>
-      </div>
+      <CartItems session={session} />
     </div>
   );
 };
