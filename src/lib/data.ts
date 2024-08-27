@@ -1,7 +1,7 @@
 import { connectDb } from "@/src/lib/database";
 import { User, Product, Cart } from "@/src/lib/models";
 import { convertId } from "@/src/utils/utils";
-import { FlattenMaps, LeanDocument } from "mongoose";
+import mongoose, { FlattenMaps, LeanDocument } from "mongoose";
 
 // static data
 export const cigarBrands = {
@@ -113,18 +113,21 @@ export const getCheckoutItems = async (userId: string) => {
 
     // Fetch product details for each item in cart
     const products = await Promise.all(
-      cart.cart.map(async (item: {product: string, quantity: number}) => { 
-        const productDetails = await Product.findById(item.product).lean() as LeanDocument<FlattenMaps<Product>>;  // Fetch product details by ID
+      cart.cart.map(async (item: {productId: string, quantity: number,},) => { 
+        console.log(item);
+        const productDetails = await Product.findById(new mongoose.Types.ObjectId(item.productId)).lean();
 
+        console.log(productDetails);
         // If product not found, return message
         if (!productDetails) {
-          return `Product with ID ${item.product} not found!`;
+          return `Product with ID ${item.productId} not found!`;
         }
 
         return {
           ...productDetails,
           _id: productDetails._id.toString(),
-          quantity: item.quantity,
+          quantity: productDetails.quantity,
+
         }
       })
     );

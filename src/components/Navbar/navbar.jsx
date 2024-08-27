@@ -15,6 +15,7 @@ const Navbar = async () => {
         width={150}
         height={150}
         className={styles.logo}
+        priority
       />
       <div>
         <Links session={session} />

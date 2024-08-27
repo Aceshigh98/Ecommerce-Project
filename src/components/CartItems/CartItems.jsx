@@ -5,24 +5,28 @@ import Image from "next/image";
 import { deleteFromCart } from "@/src/lib/action";
 
 const CartItems = async ({ session }) => {
+  // Check if user is logged in
   if (!session) {
     return <div>Not authorized</div>;
   }
 
+  // Get checkout items
   const products = await getCheckoutItems(session.user.email);
+  // Get cart items
   const cart = await getCartItems(session.user.email);
 
+  // Calculate total
   const getTotal = () => {
-    let total = 0;
+    if (!cart || !products || cart.cart.length !== products.length) {
+      console.log("Cart or products data is invalid");
+      return 0;
+    }
 
-    console.log(cart.cart.length);
+    let total = 0;
 
     for (let i = 0; i < cart.cart.length; i++) {
       const size = cart.cart[i].size;
       const quantity = cart.cart[i].quantity;
-      console.log(cart.cart[i].quantity);
-
-      console.log(size, quantity);
 
       if (size === "single") {
         total += products[i].priceForSingle * quantity;
@@ -33,30 +37,43 @@ const CartItems = async ({ session }) => {
     return total;
   };
 
+  // Check if products and cart are available and calculate total
   const total = getTotal();
-  console.log(total);
+
+  console.log("Total:", total);
+
+  if (!products || !cart) {
+    return <div>No items in your cart!</div>;
+  }
 
   return (
     <div className={styles.container}>
       <h1>Checkout</h1>
-      {products.map((product) => (
-        <div key={product._id} className={styles.product}>
+      {products.map((product, index) => (
+        <div key={index} className={styles.product}>
           <h2>{product.title}</h2>
-          <p>Size: {product.size}</p>
+          <p>Size: {cart.cart[index].size}</p>
           <p>Wrapper: {product.wrapper}</p>
           <p>Brand: {product.brand}</p>
           <p>Price for Single: ${product.priceForSingle}</p>
           <p>Price for Box: ${product.priceForBox}</p>
-          <p>Quantity: {product.quantity}</p>
+          <p>Quantity: {cart.cart[index].quantity}</p>
           <Image
             src={product.img || "/noAvatar.png"}
-            alt=""
-            width={50}
-            height={50}
+            alt={product.title}
+            width={75}
+            height={75}
           />
+          {console.log(product)}
           <form action={deleteFromCart}>
-            <input type="hidden" name="id" value={product._id} />
-            <button className={styles.productButton}>Delete</button>
+            {console.log("Product ID:", product)}
+            <input
+              type="hidden"
+              name="id"
+              value={cart.cart[index].uniqueItemId.toString()}
+            />
+            <input type="hidden" name="email" value={session.user.email} />
+            <button className={styles.button}>Delete</button>
           </form>
         </div>
       ))}

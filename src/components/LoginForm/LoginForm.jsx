@@ -16,12 +16,14 @@ const LoginForm = () => {
         placeholder="username"
         name="username"
         required={true}
+        autoComplete="on"
       />
       <input
         type="password"
         placeholder="password"
         name="password"
         required={true}
+        autoComplete="on"
       />
       <button>Login</button>
       {state?.error}

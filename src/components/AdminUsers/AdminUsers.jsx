@@ -9,9 +9,9 @@ const AdminUsers = async () => {
   return (
     <div className={styles.container}>
       <h1>Users</h1>
-      {users.map((user) => (
+      {users.map((user, index) => (
         <div className={styles.user} key={user.id}>
-          <div className={styles.user} key={user.id}>
+          <div className={styles.user} key={index}>
             <span className={styles.userTitle}>
               {user.username || user.name}
             </span>

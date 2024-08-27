@@ -4,6 +4,7 @@ import { User, Product, Cart } from "./models";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
+import mongoose from "mongoose";
 
 //Login function
 export const login = async (previousState, formData) => {
@@ -199,20 +200,40 @@ export const addToCart = async (data) => {
 
   const { id, item, quantity, size } = data;
 
+  console.log(item);
+
   try {
     await connectDb();
-    const cart = await Cart.findOne({ userId: id });
+
+    // Find the user's cart
+    let cart = await Cart.findOne({ userId: id });
+
+    // If no cart exists for the user, create a new one
     if (!cart) {
-      const newCart = new Cart({
+      cart = new Cart({
         userId: id,
-        cart: [{ product: item._id, quantity, size }],
+        cart: [
+          {
+            productId: item._id,
+            quantity,
+            size,
+            uniqueItemId: new mongoose.Types.ObjectId(),
+          },
+        ],
       });
-      console.log(newCart);
-      await newCart.save();
+      await cart.save();
       revalidatePath("/cart");
       return;
     }
-    cart.cart.push({ product: item._id, quantity, size });
+
+    // Add new item to the cart
+    cart.cart.push({
+      productId: item._id,
+      quantity,
+      size,
+      uniqueItemId: new mongoose.Types.ObjectId(),
+    });
+
     await cart.save();
     revalidatePath("/cart");
   } catch (err) {
@@ -223,22 +244,47 @@ export const addToCart = async (data) => {
 
 //remove cart items from user
 export const deleteFromCart = async (formData) => {
-  if (!formData.id) {
+  console.log(formData);
+  const { id, email } = Object.fromEntries(formData);
+
+  if (!id) {
+    console.log("Missing required id!");
     return { error: "Missing required id!" };
   }
 
-  const { id } = Object.fromEntries(formData);
+  if (!email) {
+    console.log("Missing required email!");
+    return { error: "Missing required email!" };
+  }
 
   try {
+    //connect to db
     await connectDb();
-    const cart = await Cart.findOne({ _id: id });
+    const cart = await Cart.findOne({ userId: email });
 
+    //check if cart exists
     if (!cart) {
+      console.log("Cart not found!");
       return { error: "Cart not found!" };
     }
 
-    await Cart.findByIdAndDelete(id);
-    revalidatePath("/cart");
+    //update cart
+    const updatedCart = await Cart.findOneAndUpdate(
+      { userId: email },
+      { $pull: { cart: { uniqueItemId: new mongoose.Types.ObjectId(id) } } },
+      { new: true }
+    );
+
+    //check if cart was updated
+    if (!updatedCart) {
+      console.log("Cart not updated!");
+      return { error: "Cart not updated!" };
+    }
+
+    console.log("Cart updated!");
+
+    //revalidatePath("/cart");
+    revalidatePath("/checkout");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };

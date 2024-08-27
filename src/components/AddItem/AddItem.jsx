@@ -9,6 +9,8 @@ const AddItem = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("single");
 
+  console.log(item);
+
   const increaseQuantity = () => {
     setQuantity((prev) => prev + 1);
   };

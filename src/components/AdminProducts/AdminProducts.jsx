@@ -10,8 +10,8 @@ const AdminPosts = async () => {
   return (
     <div className={styles.container}>
       <h1>Products</h1>
-      {products.map((product) => (
-        <div className={styles.product} key={product.id}>
+      {products.map((product, index) => (
+        <div className={styles.product} key={index}>
           <div className={styles.detail}>
             <Image
               src={product.img || "/noAvatar.png"}

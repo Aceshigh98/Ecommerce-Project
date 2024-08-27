@@ -12,8 +12,8 @@ const SignatureSelects = async () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Signature Selects</h1>
       <div className={styles.cardWrapper}>
-        {cards.map((card) => (
-          <Card key={card.id} item={card} />
+        {cards.map((card, index) => (
+          <Card key={index} item={card} />
         ))}
       </div>
     </div>

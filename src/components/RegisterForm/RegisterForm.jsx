@@ -22,19 +22,28 @@ const RegisterForm = () => {
         placeholder="username"
         name="username"
         required={true}
+        autoComplete="on"
       />
-      <input type="email" placeholder="email" name="email" required={true} />
+      <input
+        type="email"
+        placeholder="email"
+        name="email"
+        required={true}
+        autoComplete="on"
+      />
       <input
         type="password"
         placeholder="password"
         name="password"
         required={true}
+        autoComplete="on"
       />
       <input
         type="password"
         placeholder="password"
         name="passwordRepeat"
         required={true}
+        autoComplete="on"
       />
       <button>Register</button>
       {state?.error}
