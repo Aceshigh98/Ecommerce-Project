@@ -9,8 +9,6 @@ const AddItem = ({ item }) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("single");
 
-  console.log(item);
-
   const increaseQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
@@ -24,6 +22,7 @@ const AddItem = ({ item }) => {
     setSize(e.target.value);
   };
 
+  //Cart action
   const cartAction = async (e) => {
     e.preventDefault();
 
@@ -33,8 +32,6 @@ const AddItem = ({ item }) => {
       console.log("No session found");
       return;
     }
-
-    console.log(session);
 
     try {
       await addToCart({

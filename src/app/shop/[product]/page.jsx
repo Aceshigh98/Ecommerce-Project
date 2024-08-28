@@ -78,7 +78,7 @@ const SinglePage = async ({ params }) => {
           </div>
         </div>
         <div className={styles.content}>{product.body}</div>
-        <AddItem item={product.toString()} />
+        <AddItem item={product} />
       </div>
     </div>
   );

@@ -177,7 +177,6 @@ export const addProduct = async (prevState, formData) => {
 };
 
 //Delete product function from admin page
-
 export const deleteProduct = async (formData) => {
   const { id } = Object.fromEntries(formData);
 
@@ -192,15 +191,12 @@ export const deleteProduct = async (formData) => {
 };
 
 //add cart items to user
-
 export const addToCart = async (data) => {
   if (!data.id || !data.item || !data.quantity || !data.size) {
     return { error: "Missing required fields" };
   }
 
   const { id, item, quantity, size } = data;
-
-  console.log(item);
 
   try {
     await connectDb();
@@ -217,7 +213,6 @@ export const addToCart = async (data) => {
             productId: item._id,
             quantity,
             size,
-            uniqueItemId: new mongoose.Types.ObjectId(),
           },
         ],
       });
@@ -231,7 +226,6 @@ export const addToCart = async (data) => {
       productId: item._id,
       quantity,
       size,
-      uniqueItemId: new mongoose.Types.ObjectId(),
     });
 
     await cart.save();
@@ -271,7 +265,7 @@ export const deleteFromCart = async (formData) => {
     //update cart
     const updatedCart = await Cart.findOneAndUpdate(
       { userId: email },
-      { $pull: { cart: { uniqueItemId: new mongoose.Types.ObjectId(id) } } },
+      { $pull: { cart: { _id: new mongoose.Types.ObjectId(id) } } },
       { new: true }
     );
 
