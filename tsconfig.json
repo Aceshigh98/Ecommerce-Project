@@ -39,6 +39,6 @@
     "src/lib/auth.js",
     "src/lib/database.ts",
     "src/lib/models.js"
-  ],
+, "src/app/api/webhooks/route.js"  ],
   "exclude": ["node_modules"]
 }
