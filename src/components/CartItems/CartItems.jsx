@@ -3,7 +3,14 @@ import styles from "./cartItems.module.css";
 import { getCheckoutItems, getCartItems } from "@/src/lib/data";
 import Image from "next/image";
 import { deleteFromCart } from "@/src/lib/action";
+import { loadStripe } from "@stripe/stripe-js";
 import Link from "next/link";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 const CartItems = async ({ session }) => {
   // Check if user is logged in
@@ -52,9 +59,19 @@ const CartItems = async ({ session }) => {
           <h1>Checkout</h1>
           <h2 className={styles.price}>Total: ${total}</h2>
         </div>
-        <Link href="/checkout/payment">
-          <button className={styles.checkoutButton}>Proceed To Checkout</button>
-        </Link>
+        <form action="/api/checkout" method="POST">
+          <input
+            type="hidden"
+            name="priceId"
+            value="price_1PsrLnRw5NxiagCtodffB8Vz"
+          />
+          <input type="hidden" name="orderValue" value={total} />
+          <section>
+            <button type="submit" role="link">
+              Checkout
+            </button>
+          </section>
+        </form>
       </div>
       {products.map((product, index) => (
         <div key={index} className={styles.product}>

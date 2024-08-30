@@ -27,11 +27,7 @@ export default function PreviewPage() {
   return (
     <form action="/api/checkout" method="POST">
       {/* You can pass hidden input fields if you need to send specific data */}
-      <input
-        type="hidden"
-        name="priceId"
-        value="price_1PsrLnRw5NxiagCtodffB8Vz"
-      />
+      <input type="hidden" name="priceId" value="prod_Ql5h9JSIe8HUx7" />
       <section>
         <button type="submit" role="link">
           Checkout

@@ -36,6 +36,7 @@ const cartItemSchema = new mongoose.Schema({
   productId: { type: String, required: true },
   size: { type: String, required: true },
   quantity: { type: Number, required: true },
+  price: { type: Number, required: true },
 });
 
 const userCartSchema = new mongoose.Schema(
@@ -48,6 +49,18 @@ const userCartSchema = new mongoose.Schema(
   }
 );
 
+const ordersSchema = new mongoose.Schema(
+  {
+    userId: { type: String, required: true },
+    orderItems: [cartItemSchema],  // Array of cart items, each with a unique ID
+    isPaid: { type: Boolean, required: true, default: false },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 export const Product = mongoose.models?.Product || mongoose.model("Product", productSchema);
 export const User = mongoose.models?.User || mongoose.model("User", userSchema);
 export const Cart = mongoose.models?.Cart || mongoose.model("Cart", userCartSchema);
+export const Order = mongoose.models?.Order || mongoose.model("Order", ordersSchema);

@@ -113,7 +113,7 @@ export const getCheckoutItems = async (userId: string) => {
 
     // Fetch product details for each item in cart
     const products = await Promise.all(
-      cart.cart.map(async (item: {productId: string, quantity: number,},) => { 
+      cart.cart.map(async (item: {productId: string, quantity: number},) => { 
         const productDetails = await Product.findById(new mongoose.Types.ObjectId(item.productId)).lean();
         // If product not found, return message
         if (!productDetails) {
