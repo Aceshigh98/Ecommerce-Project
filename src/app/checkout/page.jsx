@@ -3,7 +3,8 @@ import CartItems from "@/src/components/CartItems/CartItems";
 import { auth } from "@/src/lib/auth";
 import styles from "./checkout.module.css";
 
-export const Checkout = async () => {
+// Define the Checkout component as an async function
+const Checkout = async () => {
   const session = await auth();
 
   return (
@@ -13,4 +14,5 @@ export const Checkout = async () => {
   );
 };
 
+// Export the component as the default export
 export default Checkout;
