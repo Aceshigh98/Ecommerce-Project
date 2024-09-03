@@ -16,10 +16,7 @@ const Home = () => {
             Delicate Taste
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            asperiores recusandae ducimus eligendi voluptate odit saepe illum!
-            Praesentium nulla eos dolor vel? Atque non adipisci ullam
-            repellendus labore minus nostrum?
+          At our shop, we take pride in offering an exceptional selection of cigars that cater to true connoisseurs and newcomers alike, featuring the top brands renowned for their outstanding quality, taste, and aroma. 
           </p>
           <Link href={"/shop"}>
             <button className={styles.button}>Shop Now</button>
@@ -37,10 +34,7 @@ const Home = () => {
         <div className={styles.detailsTextContainer}>
           <h1>GREAT VIBES</h1>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam,
-            asperiores recusandae ducimus eligendi voluptate odit saepe illum!
-            Praesentium nulla eos dolor vel? Atque non adipisci ullam
-            repellendus labore minus nostrum?
+          Smoking a great cigar is more than just a pastime; it's a moment of pure relaxation and indulgence that allows you to savor the finer things in life. As you light up and take that first draw, a sense of calm washes over you, releasing the tension of the day and inviting you to slow down and enjoy the present. The rich, complex flavors of a well-crafted cigar dance across your palate, each puff unfolding new layers of taste that complement a good conversation, a quiet evening, or a reflective moment alone. With every inhale, you're not just smoking a cigar—you're embracing a ritual that enhances your time, turning it into a luxurious experience of peace and enjoyment.
           </p>
         </div>
       </div>
@@ -53,14 +47,13 @@ const Home = () => {
           alt=""
         ></Image>
         <div className={styles.cigarOfMonthTextContainer}>
-          <h1>CIGAR OF THE MONTH</h1>
+          <h1>View our Inventory</h1>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum
-            vel cupiditate est repudiandae alias ipsum dolore a quo mollitia
-            dolorem libero minus nam quibusdam adipisci consectetur, ex in quas.
-            Vel?
+          Our shop proudly carries a wide variety of cigar brands, wrappers, and sizes to suit every preference, from mild to full-bodied experiences. We feature renowned names such as Cohiba, Montecristo, Arturo Fuente, Padron, and Romeo y Julieta, alongside other top brands celebrated for their quality and craftsmanship. Whether you're looking for a classic favorite or something new to explore, our diverse selection offers something for every cigar enthusiast.
           </p>
-          <button>View Cigar</button>
+          <Link href={"/shop"}>
+            <button className={styles.button}>Shop Now</button>
+          </Link>
         </div>
       </div>
     </>

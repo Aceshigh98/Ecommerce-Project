@@ -1,6 +1,6 @@
-import { connectDb } from "@lib/database";
+import { connectDb } from "@/src/lib/database";
 import { NextResponse } from "next/server";
-import { Product } from "@lib/models";
+import { Product } from "@/src/lib/models";
 
 export const GET = async (request) => {
   try {
