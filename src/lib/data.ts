@@ -1,7 +1,7 @@
 import { connectDb } from "@/src/lib/database";
 import { User, Product, Cart } from "@/src/lib/models";
 import { convertId } from "@/src/utils/utils";
-import mongoose, { FlattenMaps, LeanDocument } from "mongoose";
+import mongoose, { FlattenMaps, Document } from "mongoose";
 
 // static data
 export const cigarBrands = {
