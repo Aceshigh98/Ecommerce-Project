@@ -85,55 +85,63 @@ export const getCartItems = async (userId: string) => {
   }
 };
 
+
+
+// Define Product interface for type safety
+interface ProductDetails {
+  _id: string;
+  title: string;
+  size: string;
+  wrapper: string;
+  brand: string;
+  priceForSingle: number;
+  priceForBox: number;
+  quantity: number;
+  img: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+// Fetch checkout items for a given user
 export const getCheckoutItems = async (userId: string) => {
-
-  // Define
-  interface Product {
-    _id: string;
-    title: string;
-    size: string;
-    wrapper: string;
-    brand: string;
-    priceForSingle: number;
-    priceForBox: number;
-    quantity: number;
-    img: string;
-    createdAt?: string;
-    updatedAt?: string;
-  }
-
   try {
     await connectDb();
-    const cart = await Cart.findOne({userId});
+    const cart = await Cart.findOne({ userId });
 
     // If cart is empty, return message
-    if (!cart) {
+    if (!cart || cart.cart.length === 0) {
       return "No items in cart!";
     }
 
     // Fetch product details for each item in cart
     const products = await Promise.all(
-      cart.cart.map(async (item: {productId: string, quantity: number},) => { 
+      cart.cart.map(async (item: { productId: string; quantity: number }) => {
+        // Use lean<ProductDetails> to specify return type
         const productDetails = await Product.findById(new mongoose.Types.ObjectId(item.productId)).lean();
-        // If product not found, return message
-        if (!productDetails) {
+
+        // Ensure productDetails has the expected structure
+        if (!productDetails || !("_id" in productDetails)) {
           return `Product with ID ${item.productId} not found!`;
         }
 
-        return {
-          ...productDetails,
-          _id: productDetails._id.toString(),
-          quantity: productDetails.quantity,
+        // Type assertion to ProductDetails
+        const product = productDetails as ProductDetails;
 
-        }
+        return {
+          ...product,
+          _id: product._id.toString(), // Convert _id to string
+          quantity: item.quantity, // Use the quantity from the cart item
+        };
       })
     );
-        
+
     return products;
   } catch (error) {
+    console.error("Error fetching checkout items:", error);
     throw new Error("Failed to fetch checkout items!");
   }
-}
+};
+
 
 
 
