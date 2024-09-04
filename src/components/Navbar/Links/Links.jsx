@@ -42,7 +42,7 @@ const Links = ({ session }) => {
       }
 
       const res = await fetch(
-        `http://localhost:3000/api/cart/${session.user.email}`,
+        `http://${process.env.BASE_URL}/api/cart/${session.user.email}`,
         {
           method: "GET",
           revalidate: 3600,

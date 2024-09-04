@@ -5,7 +5,7 @@ import { getProduct } from "@/src/lib/data";
 import AddItem from "@/src/components/AddItem/AddItem";
 
 const getData = async (id) => {
-  const res = await fetch(`http://aces-cigars.com/api/store/${id}`, {
+  const res = await fetch(`${process.env.BASE_URL}/api/store/${id}`, {
     next: { revalidate: 3600 },
   });
 
