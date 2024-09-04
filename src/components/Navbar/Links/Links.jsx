@@ -41,16 +41,16 @@ const Links = ({ session }) => {
         return;
       }
 
-      const res = await fetch(
-        `${process.env.BASE_URL}/api/cart/${session.user.email}`,
-        {
-          method: "GET",
-          revalidate: 3600,
-        }
-      );
+      const res = await fetch(`/api/cart/${session.user.email}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        revalidate: 3600,
+      });
 
       if (!res.ok) {
-        throw new Error("Something went wrong");
+        throw new Error("Something went wrong: " + res.status);
       }
 
       const data = await res.json();
