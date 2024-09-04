@@ -9,6 +9,7 @@
     width: 500px;
     background-color: var(--bgSoft);
     padding: 50px;
+    margin-top: 250px;
     display: flex;
     flex-direction: column;
     text-align: center;
