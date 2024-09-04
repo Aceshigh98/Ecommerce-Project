@@ -39,15 +39,52 @@ export const getAllProducts = async () => {
   }
 };
 
-export const getProduct = async (id: string) => {
+// Define the TypeScript interface for the product
+interface ProductType {
+  _id: string;
+  title: string;
+  body: string;
+  size: string;
+  wrapper: string;
+  brand: string;
+  priceForSingle: number;
+  priceForBox: number;
+  singleInStock: number;
+  boxInStock: number;
+  img: string;
+  signature: string;
+  createdAt?: string;  // Optional fields
+  updatedAt?: string;
+  __v?: number;
+}
+
+// Update the function to use lean with proper typing
+export const getProduct = async (id: string): Promise<ProductType | null> => {
   try {
     await connectDb();
-    const product = await Product.findById(id);
-    return product;
+
+    // Use .lean<ProductType>() to ensure the returned object matches the interface
+    const product = await Product.findById(id).lean<ProductType & { createdAt?: Date; updatedAt?: Date; _id: mongoose.Types.ObjectId }>();
+
+    if (product) {
+      // Convert complex types to simple values
+      return {
+        ...product,
+        _id: product._id.toString(),  // Convert ObjectId to string
+        createdAt: product.createdAt ? new Date(product.createdAt).toISOString() : undefined,  // Convert Date to ISO string
+        updatedAt: product.updatedAt ? new Date(product.updatedAt).toISOString() : undefined,  // Convert Date to ISO string
+      };
+    }
+
+    return null;  // Return null if no product is found
   } catch (error) {
+    console.error(error);
     throw new Error("Failed to fetch product!");
   }
 };
+
+
+
 
 //User schema actions.
 

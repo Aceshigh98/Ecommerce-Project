@@ -4,7 +4,6 @@ import { getCheckoutItems, getCartItems } from "@/src/lib/data";
 import Image from "next/image";
 import { deleteFromCart } from "@/src/lib/action";
 import { loadStripe } from "@stripe/stripe-js";
-import Link from "next/link";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -21,9 +20,10 @@ const CartItems = async ({ session }) => {
   }
 
   // Get checkout items
-  const products = await getCheckoutItems(session.user.email);
+  const products = (await getCheckoutItems(session.user.email)) || []; // Ensure products is an array
+
   // Get cart items
-  const cart = await getCartItems(session.user.email);
+  const cart = (await getCartItems(session.user.email)) || { cart: [] }; // Ensure cart is an object with a cart property
 
   // Calculate total
   const getTotal = () => {
@@ -50,8 +50,8 @@ const CartItems = async ({ session }) => {
   // Check if products and cart are available and calculate total
   const total = getTotal();
 
-  if (!products || !cart) {
-    return <div>No items in your cart!</div>;
+  if (!Array.isArray(products) || products.length === 0) {
+    return <div className={styles.authorized}>No items in your cart!</div>;
   }
 
   return (
@@ -75,34 +75,38 @@ const CartItems = async ({ session }) => {
           </section>
         </form>
       </div>
-      {products.map((product, index) => (
-        <div key={index} className={styles.product}>
-          <div className={styles.textContainer}>
-            <h1>{product.title}</h1>
-            <p>Size: {cart.cart[index].size}</p>
-            <p>Wrapper: {product.wrapper}</p>
-            <p>Brand: {product.brand}</p>
-            <p>Price for Single: ${product.priceForSingle}</p>
-            <p>Price for Box: ${product.priceForBox}</p>
-            <p>Quantity: {cart.cart[index].quantity}</p>
-          </div>
-          <Image
-            src={product.img || "/noAvatar.png"}
-            alt={product.title}
-            width={300}
-            height={300}
-          />
-          <form action={deleteFromCart}>
-            <input
-              type="hidden"
-              name="id"
-              value={cart.cart[index]._id.toString()}
+      {Array.isArray(products) && products.length > 0 ? (
+        products.map((product, index) => (
+          <div key={index} className={styles.product}>
+            <div className={styles.textContainer}>
+              <h1>{product.title}</h1>
+              <p>Size: {cart.cart[index].size}</p>
+              <p>Wrapper: {product.wrapper}</p>
+              <p>Brand: {product.brand}</p>
+              <p>Price for Single: ${product.priceForSingle}</p>
+              <p>Price for Box: ${product.priceForBox}</p>
+              <p>Quantity: {cart.cart[index].quantity}</p>
+            </div>
+            <Image
+              src={product.img || "/noAvatar.png"}
+              alt={product.title}
+              width={300}
+              height={300}
             />
-            <input type="hidden" name="email" value={session.user.email} />
-            <button className={styles.button}>Delete</button>
-          </form>
-        </div>
-      ))}
+            <form action={deleteFromCart}>
+              <input
+                type="hidden"
+                name="id"
+                value={cart.cart[index]._id.toString()}
+              />
+              <input type="hidden" name="email" value={session.user.email} />
+              <button className={styles.button}>Delete</button>
+            </form>
+          </div>
+        ))
+      ) : (
+        <div className={styles.authorized}>No items in your cart!</div>
+      )}
     </div>
   );
 };
