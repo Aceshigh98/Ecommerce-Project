@@ -15,6 +15,7 @@
     margin: 0;
 }
 
+
 body {
     background-color: var(--bg);
     color: var(--text);
@@ -23,7 +24,7 @@ body {
 
 a {
     text-decoration: none;
-    color: inherit;
+    color: var(--text) !important; /* Ensures the link color is consistent */
 }
 
 h1 {
@@ -65,12 +66,12 @@ button:hover {
 .container {  
     display: flex;
     max-width: 2560px;
-    width: 100%; /* Subtract padding from total width */
+    width: 100%;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     flex-direction: column;
-    padding-left: 50px;
+    padding: 0 50px; /* Consolidated padding */
     overflow: hidden;
 }
 
@@ -83,18 +84,21 @@ button:hover {
 @media (max-width: 2500px) {
     .container {
         width: calc(100% - 100px); /* Subtract padding from total width */
+
     }
 }
 
 @media (max-width: 1536px) {
     .container {
         width: calc(100% - 100px );
+    
     }
 }
 
 @media (max-width: 1366px) {
     .container {
         width: calc(100% - 100px);
+        
         
     }
 }
@@ -113,9 +117,10 @@ button:hover {
 
 @media (max-width: 768px) {
     .container {
-        width: calc(100%);
+        width: calc(100% - 100px);
         padding-left: 0px;
         padding-right: 0px;
+        
     }
 }
 
@@ -129,7 +134,7 @@ button:hover {
 
 @media (max-width: 475px) {
     .container {
-        width: calc(100%);
+        width: calc(100% + 30px);
         padding-left: 0px;
         padding-right: 0px;
     }
