@@ -7,6 +7,10 @@
    
 }
 
+.authorized {
+    margin-top:250px;
+}
+
 .checkoutHeader {
     display: flex;
     justify-content: space-around;

@@ -113,6 +113,35 @@ const Links = ({ session }) => {
               onClick={() => setOpen((prev) => !prev)}
             />
           ))}
+          <Navlink
+            onClick={() => setOpen((prev) => !prev)}
+            item={{ name: "Checkout", path: "/checkout" }}
+          >
+            {" "}
+          </Navlink>
+          <div
+            onClick={handleCart}
+            className={cartLength > 0 ? styles.cart : styles.cartActive}
+          >
+            <FaShoppingCart />
+            <div>{cartLength}</div>
+          </div>
+
+          {session?.user ? (
+            <>
+              {session.user?.isAdmin && (
+                <Navlink item={{ name: "Admin", path: "/admin" }} />
+              )}
+              <form action={handleLogout}>
+                <button className={styles.logout}>Logout</button>
+              </form>
+            </>
+          ) : (
+            <Navlink
+              onClick={() => setOpen((prev) => !prev)}
+              item={{ name: "Login", path: "/login" }}
+            />
+          )}
         </div>
       )}
     </div>

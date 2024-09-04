@@ -15,7 +15,9 @@ const stripePromise = loadStripe(
 const CartItems = async ({ session }) => {
   // Check if user is logged in
   if (!session) {
-    return <div>Not authorized</div>;
+    return (
+      <div className={styles.authorized}>Not authorized! Please Login.</div>
+    );
   }
 
   // Get checkout items
@@ -67,7 +69,7 @@ const CartItems = async ({ session }) => {
           />
           <input type="hidden" name="orderValue" value={total} />
           <section>
-            <button type="submit" role="link">
+            <button className={styles.button} type="submit" role="link">
               Checkout
             </button>
           </section>

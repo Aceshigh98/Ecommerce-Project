@@ -11,13 +11,14 @@
 }
 
 * {
-    padding: 0;
+    width: auto;
     margin: 0;
 }
 
 body {
     background-color: var(--bg);
-    color: var(--text);   
+    color: var(--text);
+    
 }
 
 a {
@@ -64,13 +65,13 @@ button:hover {
 .container {  
     display: flex;
     max-width: 2560px;
-    margin: auto;
+    width: 100%; /* Subtract padding from total width */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     flex-direction: column;
     padding-left: 50px;
-    padding-right: 50px;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 3680px) {
@@ -128,6 +129,7 @@ button:hover {
 
 @media (max-width: 475px) {
     .container {
+        width: calc(100%);
         padding-left: 0px;
         padding-right: 0px;
     }
