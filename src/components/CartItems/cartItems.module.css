@@ -45,6 +45,7 @@
     width: 100px;
     height: 30px;
     font-weight: 700;
+    color: var(--text) !important; /* Ensures the link color is consistent */
 }
 
 .checkoutButton {

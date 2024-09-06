@@ -43,6 +43,7 @@
   border: none;
   font-weight: 800;
   font-size: large;
+  color: var(--text) !important; /* Ensures the link color is consistent */
 }
 
 .priceContainer {
