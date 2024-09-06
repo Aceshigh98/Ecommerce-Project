@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 import Navbar from "../components/Navbar/navbar";
 import Footer from "../components/Footer/footer";
-import Head from "next/head";
 
 const roboto = Roboto({
   weight: "700",
@@ -31,6 +31,7 @@ export default function RootLayout({
       <body className={roboto.className}>
         <div className="container">
           <SessionProvider>
+            <Analytics/>
             <Navbar />
             {children}
             <Footer />
