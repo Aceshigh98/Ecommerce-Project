@@ -94,7 +94,6 @@
 
 .detailsContainer div {
   flex: 1;
-  height: 650px;
   flex-direction: column;
   position: relative;
   text-align: left;
@@ -107,6 +106,7 @@
 
 .detailsTextContainer {
   position: relative;
+  height: fit-content;
   z-index: 2; /* Ensures the text is in front of the image */
   display: flex;
   flex-direction: column;
@@ -125,7 +125,7 @@
 .cigarOfMonthContainer {
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: fit-content;
   border-bottom-left-radius: 1.5rem;
   border-bottom-right-radius: 1.5rem;
   width: 100%;
@@ -155,13 +155,11 @@
 }
 
 .cigarOfMonthTextContainer {
-  width: 50%;
+  width: fit-content;
   position: absolute;
-  z-index: 2; /* Ensures the text is in front of the image */
   display: flex;
   flex-direction: column;
   gap: 20px;
-  justify-content: center;
   text-align: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0); /* Change to desired opacity */
