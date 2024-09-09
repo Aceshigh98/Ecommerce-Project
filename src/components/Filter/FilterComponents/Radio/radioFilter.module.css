@@ -29,6 +29,7 @@
     align-items: center;
     border-radius: 10px;
     border: none;
+    color: var(--text) !important; /* Ensures the link color is consistent */
 }
 
 .active {
@@ -52,6 +53,6 @@
         justify-content: center;
     }
     .button{
-        
+        color: var(--text) !important; /* Ensures the link color is consistent */
     }
 }

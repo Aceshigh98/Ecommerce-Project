@@ -23,6 +23,7 @@ padding: 10px;
     border-radius: 10px;
     border: none;
     background-color: var(--btn);
+    color: var(--text) !important; /* Ensures the link color is consistent */
 }
 
 @media screen and (max-width: 768px) {
