@@ -10,6 +10,7 @@
     --backdrop : #ccc5b9;
 }
 
+
 * {
     width: auto;
     margin: 0;
@@ -19,7 +20,6 @@
 body {
     background-color: var(--bg);
     color: var(--text);
-    
 }
 
 a {
@@ -65,13 +65,13 @@ button:hover {
 
 .container {  
     display: flex;
+    flex-direction: column;
     max-width: 2560px;
-    width: 100%;
+    width: auto;
     margin: auto;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    flex-direction: column;
     padding: 0 50px; /* Consolidated padding */
     overflow: hidden;
 }
@@ -118,25 +118,21 @@ button:hover {
 
 @media (max-width: 768px) {
     .container {
-        width: calc(100% - 100px);
-        padding-left: 0px;
-        padding-right: 0px;
-        
-    }
-}
-
-@media (max-width: 640px) {
-    .container {
         width: calc(100%);
         padding-left: 0px;
         padding-right: 0px;
     }
 }
 
-@media (max-width: 475px) {
+@media (max-width: 640px) {
     .container {
-        width: calc(100% + 30px);
-        padding-left: 0px;
-        padding-right: 0px;
+        width: calc(100%);
+    }
+}
+
+@media (max-width: 450px) {
+    .container {
+        width: calc(100%);
+       
     }
 }
