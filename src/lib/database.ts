@@ -1,32 +1,37 @@
 
 import mongoose from 'mongoose';
 
-interface Connection {
-    isConnected?: number;
-}
+let initializedTimes: number = 0;
 
-const connection: Connection = {}
+class MainDB {
+    private static instance: MainDB | null = null;
 
-export const connectDb = async ():Promise<void> => {
-    try {
-        if(connection.isConnected) {
-            console.log('Using existing connection');
-            return;
+    private constructor() {
+        this.initializeDB();
+    }
+
+    public static getInstance(): void {
+        if (!MainDB.instance) {
+            MainDB.instance = new MainDB();
         }
+    }
 
+    private async initializeDB() {
         if (!process.env.MONGO) {
             throw new Error('MongoDB connection string not found');
         }
 
-        console.log("MongoDB Connection String:", process.env.MONGO);
-
-
-        const db = await mongoose.connect(process.env.MONGO);
-        connection.isConnected = db.connections[0].readyState;
-        console.log('New Mongo Connection!');
-
+        try {
+            initializedTimes++;
+            console.log("MongoDB Connection String:", process.env.MONGO);
+            const db = await mongoose.connect(process.env.MONGO);
+            console.log('New Mongo Connection!');
         } catch (error) {
-        console.log(error);
-        throw new Error('Unable to connect to database ' + error);
+            console.log(error);
+            throw new Error('Unable to connect to database ' + error);
         }
-};
+    }
+
+}
+
+export default MainDB;
